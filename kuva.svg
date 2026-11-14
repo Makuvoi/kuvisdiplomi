@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-labelledby="otsikko">
+  <title id="otsikko">Merirosvokapteeni ruorissa myrskyssä</title>
+  <defs>
+    <linearGradient id="taivas" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0d1220"/>
+      <stop offset="0.6" stop-color="#25304a"/>
+      <stop offset="1" stop-color="#3b4a63"/>
+    </linearGradient>
+    <linearGradient id="meri" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1f3b4d"/>
+      <stop offset="1" stop-color="#0b1a24"/>
+    </linearGradient>
+    <linearGradient id="kansi" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#6b4527"/>
+      <stop offset="1" stop-color="#3a2414"/>
+    </linearGradient>
+    <radialGradient id="salama" cx="0.78" cy="0.2" r="0.5">
+      <stop offset="0" stop-color="#c9d8ff" stop-opacity="0.55"/>
+      <stop offset="1" stop-color="#c9d8ff" stop-opacity="0"/>
+    </radialGradient>
+    <pattern id="sade" width="40" height="40" patternUnits="userSpaceOnUse" patternTransform="rotate(20)">
+      <line x1="10" y1="0" x2="10" y2="22" stroke="#aab8d0" stroke-width="1.5" stroke-opacity="0.35"/>
+      <line x1="30" y1="18" x2="30" y2="36" stroke="#aab8d0" stroke-width="1.2" stroke-opacity="0.25"/>
+    </pattern>
+  </defs>
+
+  <!-- Taivas ja salaman hehku -->
+  <rect width="1200" height="800" fill="url(#taivas)"/>
+  <rect width="1200" height="800" fill="url(#salama)"/>
+
+  <!-- Pilvet -->
+  <g fill="#161c2c">
+    <ellipse cx="150" cy="90" rx="260" ry="90"/>
+    <ellipse cx="480" cy="60" rx="240" ry="80"/>
+    <ellipse cx="820" cy="80" rx="200" ry="70"/>
+    <ellipse cx="1100" cy="60" rx="220" ry="90"/>
+  </g>
+  <g fill="#222a3d">
+    <ellipse cx="300" cy="150" rx="220" ry="60"/>
+    <ellipse cx="700" cy="140" rx="180" ry="50"/>
+    <ellipse cx="1050" cy="160" rx="200" ry="55"/>
+  </g>
+
+  <!-- Salama -->
+  <polygon points="960,120 915,250 950,250 900,400 1000,220 960,220 1010,120"
+           fill="#f2f6ff" stroke="#b9cbff" stroke-width="4"/>
+
+  <!-- Meri ja aallot -->
+  <path d="M0,470 Q150,420 300,470 T600,460 T900,440 T1200,460 V800 H0 Z" fill="url(#meri)"/>
+  <path d="M760,520 C860,330 1020,300 1200,330 V800 H760 Z" fill="#183244"/>
+  <path d="M1200,330 C1060,320 980,360 930,420 C990,380 1060,370 1110,395 C1060,400 1030,420 1010,445"
+        fill="none" stroke="#dfe9f0" stroke-width="10" stroke-linecap="round"/>
+  <path d="M0,520 Q100,490 200,520 T400,515" fill="none" stroke="#9fb6c4" stroke-width="5" stroke-opacity="0.6"/>
+
+  <!-- Masto ja repeytynyt purje -->
+  <rect x="250" y="90" width="22" height="580" fill="#3e2814"/>
+  <rect x="150" y="170" width="250" height="12" fill="#3e2814"/>
+  <path d="M160,182 L395,182 Q420,300 380,410 L330,380 L300,420 L260,385 L210,420 Q150,300 160,182 Z"
+        fill="#d8ccb0" stroke="#8c7d5f" stroke-width="3"/>
+  <line x1="272" y1="100" x2="470" y2="660" stroke="#2a1b0e" stroke-width="3"/>
+  <line x1="250" y1="100" x2="60" y2="660" stroke="#2a1b0e" stroke-width="3"/>
+
+  <!-- Merirosvolippu -->
+  <path d="M272,92 L380,80 Q360,100 385,125 L272,128 Z" fill="#111"/>
+  <circle cx="318" cy="102" r="10" fill="#eee"/>
+  <path d="M302,118 L334,92 M302,92 L334,118" stroke="#eee" stroke-width="4"/>
+
+  <!-- Kansi ja reelinki -->
+  <path d="M0,650 L1200,600 V800 H0 Z" fill="url(#kansi)"/>
+  <g stroke="#2a1b0e" stroke-width="2" stroke-opacity="0.6">
+    <line x1="0" y1="700" x2="1200" y2="660"/>
+    <line x1="0" y1="750" x2="1200" y2="720"/>
+  </g>
+  <path d="M0,600 L1200,550" stroke="#4a2f19" stroke-width="14"/>
+  <g fill="#4a2f19">
+    <rect x="60" y="597" width="12" height="53"/>
+    <rect x="760" y="565" width="12" height="55"/>
+    <rect x="1000" y="555" width="12" height="55"/>
+    <rect x="1140" y="550" width="12" height="54"/>
+  </g>
+
+  <!-- Kapteeni -->
+  <g>
+    <!-- Takin liepeet tuulessa -->
+    <path d="M555,440 C520,520 690,560 760,600 C730,560 720,520 690,470 Z" fill="#3d1414"/>
+    <!-- Jalat ja saappaat -->
+    <rect x="567" y="585" width="28" height="45" fill="#2c2420"/>
+    <rect x="607" y="585" width="28" height="45" fill="#2c2420"/>
+    <path d="M560,620 h40 v20 h-48 Z" fill="#111"/>
+    <path d="M603,615 h40 v25 h-44 Z" fill="#111"/>
+    <!-- Takki -->
+    <path d="M545,375 L655,375 L685,595 L515,595 Z" fill="#6e1f1f"/>
+    <path d="M600,380 L600,595" stroke="#d6a93a" stroke-width="3" stroke-dasharray="2 18"/>
+    <rect x="525" y="500" width="150" height="16" fill="#2a1b0e"/>
+    <rect x="590" y="497" width="22" height="22" fill="none" stroke="#d6a93a" stroke-width="4"/>
+    <!-- Vasen käsi ruoriin -->
+    <path d="M552,390 C515,430 490,470 478,520" stroke="#6e1f1f" stroke-width="30" stroke-linecap="round" fill="none"/>
+    <circle cx="478" cy="525" r="13" fill="#d9a07a"/>
+    <!-- Oikea käsi sapeli ylhäällä -->
+    <path d="M648,390 C690,360 715,320 735,285" stroke="#6e1f1f" stroke-width="30" stroke-linecap="round" fill="none"/>
+    <circle cx="738" cy="280" r="13" fill="#d9a07a"/>
+    <path d="M742,272 Q800,190 870,150" stroke="#dfe5ee" stroke-width="7" fill="none" stroke-linecap="round"/>
+    <path d="M728,270 L752,288" stroke="#d6a93a" stroke-width="7" stroke-linecap="round"/>
+    <!-- Pää -->
+    <rect x="588" y="345" width="24" height="32" fill="#c98f6a"/>
+    <circle cx="600" cy="325" r="36" fill="#d9a07a"/>
+    <path d="M566,330 Q600,420 634,330 Q620,350 600,348 Q580,350 566,330 Z" fill="#2b1a10"/>
+    <path d="M584,334 Q600,326 616,334" stroke="#2b1a10" stroke-width="5" fill="none"/>
+    <!-- Silmälappu ja silmä -->
+    <ellipse cx="588" cy="315" rx="9" ry="7" fill="#111"/>
+    <path d="M566,302 L630,320" stroke="#111" stroke-width="3"/>
+    <circle cx="614" cy="316" r="3.5" fill="#111"/>
+    <!-- Hiukset tuulessa -->
+    <path d="M565,315 C540,320 520,335 505,330 C525,345 548,340 570,335 Z" fill="#2b1a10"/>
+    <!-- Kolmikolkkahattu -->
+    <path d="M540,300 Q600,240 660,300 Q630,285 600,288 Q570,285 540,300 Z" fill="#141414"/>
+    <path d="M530,300 Q600,270 670,300 Q600,315 530,300 Z" fill="#1c1c1c" stroke="#d6a93a" stroke-width="3"/>
+    <circle cx="600" cy="272" r="8" fill="#eee"/>
+    <path d="M590,283 L610,293 M610,283 L590,293" stroke="#eee" stroke-width="3"/>
+  </g>
+
+  <!-- Ruori -->
+  <rect x="455" y="560" width="30" height="80" fill="#4a2f19"/>
+  <g transform="translate(470 560)" stroke="#5a3a1e" stroke-linecap="round">
+    <g stroke-width="10">
+      <line x1="-95" y1="0" x2="95" y2="0"/>
+      <line x1="0" y1="-95" x2="0" y2="95"/>
+      <line x1="-67" y1="-67" x2="67" y2="67"/>
+      <line x1="-67" y1="67" x2="67" y2="-67"/>
+    </g>
+    <circle r="70" fill="none" stroke-width="14"/>
+    <circle r="14" fill="#d6a93a" stroke="none"/>
+  </g>
+
+  <!-- Sade päällimmäisenä -->
+  <rect width="1200" height="800" fill="url(#sade)"/>
+</svg>

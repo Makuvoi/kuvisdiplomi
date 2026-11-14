@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kuvisprokkis</title>
+  <style>
+    :root {
+      --tausta: #faf8f5;
+      --teksti: #2b2b2b;
+      --korostus: #c0533a;
+    }
+
+    body {
+      margin: 0;
+      background: var(--tausta);
+      color: var(--teksti);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.6;
+    }
+
+    main {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 48px 16px;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      line-height: 1.2;
+      margin: 0 0 24px;
+      color: var(--korostus);
+    }
+
+    p {
+      font-size: 1.125rem;
+      margin: 0 0 32px;
+    }
+
+    figure {
+      margin: 0;
+    }
+
+    img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      background: #e6e1da; /* näkyy, jos kuvaa ei vielä ole */
+      min-height: 200px;
+    }
+
+    figcaption {
+      font-size: 0.9rem;
+      color: #6b6b6b;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Otsikko tähän</h1>
+
+    <p>
+      Tähän tulee leipäteksti. Kerro lyhyesti, mistä projektissa on kyse,
+      mitä olet tehnyt ja mikä siinä on kiinnostavaa. Voit lisätä useampia
+      kappaleita kopioimalla tämän &lt;p&gt;-elementin.
+    </p>
+
+    <figure>
+      <img src="kuva.svg" alt="Silmälappupäinen merirosvokapteeni seisoo ruorissa sapeli koholla, taustalla salama, sade ja vaahtopäiset aallot.">
+      <figcaption>Merirosvokapteeni myrskyssä</figcaption>
+    </figure>
+  </main>
+</body>
+</html>
