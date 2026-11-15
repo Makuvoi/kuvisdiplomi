@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pilvi – Meistä</title>
+  <meta name="description" content="[Lyhyt hakukonekuvaus Pilven tutkimuksesta, missiosta ja johdosta]">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="pilvet" aria-hidden="true">
+    <span class="pilvi pilvi--1"></span>
+    <span class="pilvi pilvi--2"></span>
+    <span class="pilvi pilvi--3"></span>
+    <span class="pilvi pilvi--4"></span>
+    <span class="pilvi pilvi--5"></span>
+  </div>
+
+  <header class="ylatunniste">
+    <div class="ylatunniste__sisalto">
+      <a class="logo" href="index.html">
+        <svg viewBox="0 0 64 40" aria-hidden="true">
+          <defs>
+            <linearGradient id="logoLiuku" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#6f8dff"/>
+              <stop offset="0.5" stop-color="#a27dff"/>
+              <stop offset="1" stop-color="#ff8fcf"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#logoLiuku)" d="M16 38a14 14 0 0 1-2-27.9A18 18 0 0 1 48.5 9 12 12 0 0 1 50 38Z"/>
+          <circle cx="32" cy="22" r="4" fill="#fff" opacity="0.9"/>
+        </svg>
+        Pilvi
+      </a>
+      <nav aria-label="Päävalikko">
+        <ul class="nav">
+          <li><a href="index.html">Etusivu</a></li>
+          <li><a href="tuote.html">Tuote</a></li>
+          <li><a href="about.html" aria-current="page">Meistä</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero hero--keskitetty">
+      <div>
+        <span class="ylaotsake ph">Yläotsake: "Meistä"</span>
+        <h1 class="liukuteksti ph">Pääotsikko, joka kertoo, keitä Pilvi on ja miksi se on olemassa</h1>
+        <p class="johdanto ph">Johdanto (2–3 lausetta): yrityksen tarina lyhyesti – mistä idea syntyi ja mihin se pyrkii.</p>
+      </div>
+    </section>
+
+    <!-- MISSIO -->
+    <section class="osio ilmesty">
+      <div class="kaksi">
+        <div>
+          <span class="ylaotsake ph">Yläotsake: "Missio"</span>
+          <h2 class="ph">Missio yhdellä vahvalla lauseella</h2>
+          <p class="ph">Kappale, joka avaa mission: millaisen maailman Pilvi haluaa luoda ja miten ajattelun tehostaminen palvelee ihmisiä.</p>
+          <p class="ph">Toinen kappale yrityksen arvoista, esim. eettisyys, avoimuus ja ihmislähtöisyys.</p>
+        </div>
+        <div class="kuvapaikka ph">Kuva: unenomainen tunnelmakuva pilvistä tai ihmisestä ajattelemassa</div>
+      </div>
+    </section>
+
+    <!-- ARVOT -->
+    <section class="osio ilmesty">
+      <div class="osio__otsake">
+        <h2 class="ph">Otsikko yrityksen arvoille</h2>
+      </div>
+      <div class="kortit">
+        <article class="kortti">
+          <h3 class="ph">Arvo 1</h3>
+          <p class="ph">1–2 lausetta arvon merkityksestä.</p>
+        </article>
+        <article class="kortti">
+          <h3 class="ph">Arvo 2</h3>
+          <p class="ph">1–2 lausetta arvon merkityksestä.</p>
+        </article>
+        <article class="kortti">
+          <h3 class="ph">Arvo 3</h3>
+          <p class="ph">1–2 lausetta arvon merkityksestä.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- TUTKIMUS -->
+    <section class="osio ilmesty">
+      <div class="osio__otsake">
+        <span class="ylaotsake ph">Yläotsake: "Tutkimus"</span>
+        <h2 class="ph">Otsikko yrityksen tutkimustyölle</h2>
+        <p class="johdanto ph">Johdanto siihen, millaista tutkimusta Pilvi tekee: neurotiede, tekoäly ja niiden yhdistäminen.</p>
+      </div>
+      <div class="kaksi" style="margin-bottom:56px">
+        <div class="kuvapaikka ph">Kuva: laboratorio tai abstrakti hermoverkkokuvitus</div>
+        <div>
+          <h3 class="ph">Tutkimusalueen otsikko, esim. aivojen ja tekoälyn rajapinta</h3>
+          <p class="ph">Kappale tutkimusmenetelmistä ja keskeisistä läpimurroista yleistajuisesti.</p>
+          <h3 class="ph">Toisen tutkimusalueen otsikko, esim. turvallisuus ja etiikka</h3>
+          <p class="ph">Kappale siitä, miten turvallisuutta ja etiikkaa tutkitaan ja valvotaan.</p>
+        </div>
+      </div>
+
+      <h3 class="ph" style="text-align:center">Otsikko aikajanalle, esim. "Matkamme"</h3>
+      <ol class="aikajana">
+        <li>
+          <div class="aikajana__vuosi ph">Vuosi</div>
+          <p class="ph">Virstanpylväs 1, esim. yrityksen perustaminen</p>
+        </li>
+        <li>
+          <div class="aikajana__vuosi ph">Vuosi</div>
+          <p class="ph">Virstanpylväs 2, esim. ensimmäinen prototyyppi</p>
+        </li>
+        <li>
+          <div class="aikajana__vuosi ph">Vuosi</div>
+          <p class="ph">Virstanpylväs 3, esim. kliiniset kokeet</p>
+        </li>
+        <li>
+          <div class="aikajana__vuosi ph">Vuosi</div>
+          <p class="ph">Virstanpylväs 4, esim. kuluttajalanseeraus</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- JOHTO -->
+    <section class="osio ilmesty">
+      <div class="osio__otsake">
+        <span class="ylaotsake ph">Yläotsake: "Johto"</span>
+        <h2 class="ph">Otsikko johtoryhmälle</h2>
+        <p class="johdanto ph">Lyhyt johdanto johtoryhmään.</p>
+      </div>
+      <div class="kortit">
+        <article class="kortti henkilo">
+          <div class="henkilo__kuva"><span>Muotokuva</span></div>
+          <h3 class="ph">Toimitusjohtajan nimi</h3>
+          <div class="henkilo__rooli ph">Titteli</div>
+          <p class="ph">2–3 lauseen esittely: tausta, visio ja jokin persoonallinen yksityiskohta.</p>
+        </article>
+        <article class="kortti henkilo">
+          <div class="henkilo__kuva"><span>Muotokuva</span></div>
+          <h3 class="ph">Tutkimusjohtajan nimi</h3>
+          <div class="henkilo__rooli ph">Titteli</div>
+          <p class="ph">2–3 lauseen esittely: tausta, visio ja jokin persoonallinen yksityiskohta.</p>
+        </article>
+        <article class="kortti henkilo">
+          <div class="henkilo__kuva"><span>Muotokuva</span></div>
+          <h3 class="ph">Teknologiajohtajan nimi</h3>
+          <div class="henkilo__rooli ph">Titteli</div>
+          <p class="ph">2–3 lauseen esittely: tausta, visio ja jokin persoonallinen yksityiskohta.</p>
+        </article>
+        <article class="kortti henkilo">
+          <div class="henkilo__kuva"><span>Muotokuva</span></div>
+          <h3 class="ph">Etiikkajohtajan nimi</h3>
+          <div class="henkilo__rooli ph">Titteli</div>
+          <p class="ph">2–3 lauseen esittely: tausta, visio ja jokin persoonallinen yksityiskohta.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- KUTSU -->
+    <section class="osio ilmesty">
+      <div class="banneri">
+        <h2 class="ph">Loppukehotus: kutsu liittyä matkaan käyttäjänä tai sijoittajana</h2>
+        <p class="ph">Lyhyt kappale, joka sitoo mission ja tuotteen yhteen.</p>
+        <div class="hero__napit" style="justify-content:center">
+          <a class="nappi nappi--toissijainen ph" href="tuote.html">Linkki tuotesivulle</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="alatunniste">
+    <div class="alatunniste__sisalto">
+      <div>
+        <h3>Pilvi</h3>
+        <p class="ph">Lyhyt yhden lauseen kuvaus yrityksestä</p>
+      </div>
+      <div>
+        <h3>Sivut</h3>
+        <ul>
+          <li><a href="index.html">Etusivu</a></li>
+          <li><a href="tuote.html">Tuote</a></li>
+          <li><a href="about.html">Meistä</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="ph">Yhteystiedot-otsikko</h3>
+        <p class="ph">Fiktiivinen osoite ja sähköposti</p>
+      </div>
+    </div>
+    <p class="alatunniste__pohja ph">Tekijänoikeusrivi ja maininta siitä, että Pilvi on fiktiivinen yritys</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

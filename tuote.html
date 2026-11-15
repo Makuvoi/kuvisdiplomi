@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pilvi – Tuote</title>
+  <meta name="description" content="[Lyhyt hakukonekuvaus tuotesivusta ja sirun varaamisesta]">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="pilvet" aria-hidden="true">
+    <span class="pilvi pilvi--1"></span>
+    <span class="pilvi pilvi--2"></span>
+    <span class="pilvi pilvi--3"></span>
+    <span class="pilvi pilvi--4"></span>
+    <span class="pilvi pilvi--5"></span>
+  </div>
+
+  <header class="ylatunniste">
+    <div class="ylatunniste__sisalto">
+      <a class="logo" href="index.html">
+        <svg viewBox="0 0 64 40" aria-hidden="true">
+          <defs>
+            <linearGradient id="logoLiuku" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#6f8dff"/>
+              <stop offset="0.5" stop-color="#a27dff"/>
+              <stop offset="1" stop-color="#ff8fcf"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#logoLiuku)" d="M16 38a14 14 0 0 1-2-27.9A18 18 0 0 1 48.5 9 12 12 0 0 1 50 38Z"/>
+          <circle cx="32" cy="22" r="4" fill="#fff" opacity="0.9"/>
+        </svg>
+        Pilvi
+      </a>
+      <nav aria-label="Päävalikko">
+        <ul class="nav">
+          <li><a href="index.html">Etusivu</a></li>
+          <li><a href="tuote.html" aria-current="page">Tuote</a></li>
+          <li><a href="about.html">Meistä</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <span class="ylaotsake ph">Yläotsake: tuotteen nimi ja sukupolvi</span>
+        <h1 class="liukuteksti ph">Pääotsikko, joka esittelee aivosirun tunteisiin vetoavasti</h1>
+        <p class="johdanto ph">Johdanto (2–3 lausetta): mikä siru on, kenelle se on tarkoitettu ja miksi se kannattaa varata nyt.</p>
+        <div class="hero__napit">
+          <a class="nappi nappi--paa ph" href="#varaa">Kehotus: siirry varaamaan</a>
+          <a class="nappi nappi--toissijainen ph" href="#ominaisuudet">Kehotus: tutustu ominaisuuksiin</a>
+        </div>
+      </div>
+      <div class="hero__kuva" aria-hidden="true">
+        <div class="orbi"></div>
+        <div class="orbi__rengas"></div>
+        <div class="orbi__rengas orbi__rengas--2"></div>
+      </div>
+    </section>
+
+    <!-- OMINAISUUDET -->
+    <section class="osio ilmesty" id="ominaisuudet">
+      <div class="osio__otsake">
+        <span class="ylaotsake ph">Yläotsake: "Ominaisuudet"</span>
+        <h2 class="ph">Otsikko sirun keskeisille ominaisuuksille</h2>
+      </div>
+      <div class="kortit">
+        <article class="kortti">
+          <h3 class="ph">Ominaisuus 1, esim. tekoälyavusteinen ajatteluapu</h3>
+          <p class="ph">Lyhyt kuvaus ominaisuudesta ja sen hyödystä käyttäjälle.</p>
+        </article>
+        <article class="kortti">
+          <h3 class="ph">Ominaisuus 2, esim. luovuustila</h3>
+          <p class="ph">Lyhyt kuvaus ominaisuudesta ja sen hyödystä käyttäjälle.</p>
+        </article>
+        <article class="kortti">
+          <h3 class="ph">Ominaisuus 3, esim. sovellus ja yhteys pilveen</h3>
+          <p class="ph">Lyhyt kuvaus ominaisuudesta ja sen hyödystä käyttäjälle.</p>
+        </article>
+        <article class="kortti">
+          <h3 class="ph">Ominaisuus 4, esim. kivuton asennus</h3>
+          <p class="ph">Lyhyt kuvaus asennuksesta ja siitä, miltä se tuntuu.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- MALLIT -->
+    <section class="osio ilmesty" id="mallit">
+      <div class="osio__otsake">
+        <span class="ylaotsake ph">Yläotsake: "Mallit"</span>
+        <h2 class="ph">Otsikko, joka kehottaa valitsemaan sopivan sirun</h2>
+        <p class="johdanto ph">Lyhyt johdanto mallien eroihin.</p>
+      </div>
+      <div class="kortit">
+        <article class="kortti tuote">
+          <div class="tuote__siru" aria-hidden="true"></div>
+          <h3 class="ph">Mallin 1 nimi (perusmalli)</h3>
+          <p class="ph">Yhden lauseen kuvaus mallista</p>
+          <div class="tuote__hinta ph">Hinta</div>
+          <ul>
+            <li class="ph">Ominaisuus</li>
+            <li class="ph">Ominaisuus</li>
+            <li class="ph">Ominaisuus</li>
+          </ul>
+          <a class="nappi nappi--toissijainen ph" href="#varaa" data-malli="malli-1">Valitse-nappi</a>
+        </article>
+        <article class="kortti tuote tuote--suositeltu">
+          <span class="tuote__merkki ph">Suosituin</span>
+          <div class="tuote__siru" aria-hidden="true"></div>
+          <h3 class="ph">Mallin 2 nimi (suositeltu)</h3>
+          <p class="ph">Yhden lauseen kuvaus mallista</p>
+          <div class="tuote__hinta ph">Hinta</div>
+          <ul>
+            <li class="ph">Ominaisuus</li>
+            <li class="ph">Ominaisuus</li>
+            <li class="ph">Ominaisuus</li>
+            <li class="ph">Ominaisuus</li>
+          </ul>
+          <a class="nappi nappi--paa ph" href="#varaa" data-malli="malli-2">Valitse-nappi</a>
+        </article>
+        <article class="kortti tuote">
+          <div class="tuote__siru" aria-hidden="true"></div>
+          <h3 class="ph">Mallin 3 nimi (premium)</h3>
+          <p class="ph">Yhden lauseen kuvaus mallista</p>
+          <div class="tuote__hinta ph">Hinta</div>
+          <ul>
+            <li class="ph">Ominaisuus</li>
+            <li class="ph">Ominaisuus</li>
+            <li class="ph">Ominaisuus</li>
+            <li class="ph">Ominaisuus</li>
+            <li class="ph">Ominaisuus</li>
+          </ul>
+          <a class="nappi nappi--toissijainen ph" href="#varaa" data-malli="malli-3">Valitse-nappi</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- VARAUSLOMAKE -->
+    <section class="osio ilmesty" id="varaa">
+      <div class="osio__otsake">
+        <span class="ylaotsake ph">Yläotsake: "Varaa"</span>
+        <h2 class="ph">Otsikko varaukselle, esim. kutsu liittyä ensimmäisten käyttäjien joukkoon</h2>
+        <p class="johdanto ph">Lyhyt kuvaus varausprosessista ja siitä, mitä varauksen jälkeen tapahtuu.</p>
+      </div>
+
+      <div class="kortti lomake">
+        <form id="varauslomake">
+          <div class="lomake__rivi">
+            <div class="kentta">
+              <label for="etunimi" class="ph">Etunimi-kentän nimi</label>
+              <input id="etunimi" name="etunimi" type="text" autocomplete="given-name" required>
+            </div>
+            <div class="kentta">
+              <label for="sukunimi" class="ph">Sukunimi-kentän nimi</label>
+              <input id="sukunimi" name="sukunimi" type="text" autocomplete="family-name" required>
+            </div>
+          </div>
+          <div class="kentta">
+            <label for="sposti" class="ph">Sähköposti-kentän nimi</label>
+            <input id="sposti" name="sposti" type="email" autocomplete="email" required>
+          </div>
+          <div class="lomake__rivi">
+            <div class="kentta">
+              <label for="malli" class="ph">Mallin valinta</label>
+              <select id="malli" name="malli">
+                <option value="malli-1">[ Mallin 1 nimi ]</option>
+                <option value="malli-2" selected>[ Mallin 2 nimi ]</option>
+                <option value="malli-3">[ Mallin 3 nimi ]</option>
+              </select>
+            </div>
+            <div class="kentta">
+              <label for="paiva" class="ph">Toivottu asennuspäivä</label>
+              <input id="paiva" name="paiva" type="date">
+            </div>
+          </div>
+          <div class="kentta">
+            <label for="toive" class="ph">Vapaa tekstikenttä: mihin haluaisit käyttää sirua?</label>
+            <textarea id="toive" name="toive" rows="4"></textarea>
+          </div>
+          <label class="valinta">
+            <input type="checkbox" required>
+            <span class="ph">Hyväksyntäteksti: leikkisä suostumus ehtoihin ja tietosuojaan</span>
+          </label>
+          <button class="nappi nappi--paa ph" type="submit">Lähetä varaus -nappi</button>
+        </form>
+
+        <div class="vahvistus" id="vahvistus" role="status">
+          <div class="tuote__siru" aria-hidden="true"></div>
+          <h3 class="liukuteksti ph">Kiitosotsikko varauksen jälkeen</h3>
+          <p class="ph">Vahvistusviesti: varaus on vastaanotettu ja mitä seuraavaksi tapahtuu.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- UKK -->
+    <section class="osio ilmesty">
+      <div class="osio__otsake">
+        <span class="ylaotsake ph">Yläotsake: "UKK"</span>
+        <h2 class="ph">Otsikko usein kysytyille kysymyksille</h2>
+      </div>
+      <div class="ukk">
+        <details>
+          <summary class="ph">Kysymys 1, esim. turvallisuudesta</summary>
+          <p class="ph">Vastaus kysymykseen 1.</p>
+        </details>
+        <details>
+          <summary class="ph">Kysymys 2, esim. asennuksesta</summary>
+          <p class="ph">Vastaus kysymykseen 2.</p>
+        </details>
+        <details>
+          <summary class="ph">Kysymys 3, esim. akunkestosta ja päivityksistä</summary>
+          <p class="ph">Vastaus kysymykseen 3.</p>
+        </details>
+        <details>
+          <summary class="ph">Kysymys 4, esim. sirun poistamisesta</summary>
+          <p class="ph">Vastaus kysymykseen 4.</p>
+        </details>
+      </div>
+    </section>
+  </main>
+
+  <footer class="alatunniste">
+    <div class="alatunniste__sisalto">
+      <div>
+        <h3>Pilvi</h3>
+        <p class="ph">Lyhyt yhden lauseen kuvaus yrityksestä</p>
+      </div>
+      <div>
+        <h3>Sivut</h3>
+        <ul>
+          <li><a href="index.html">Etusivu</a></li>
+          <li><a href="tuote.html">Tuote</a></li>
+          <li><a href="about.html">Meistä</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="ph">Yhteystiedot-otsikko</h3>
+        <p class="ph">Fiktiivinen osoite ja sähköposti</p>
+      </div>
+    </div>
+    <p class="alatunniste__pohja ph">Tekijänoikeusrivi ja maininta siitä, että Pilvi on fiktiivinen yritys</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

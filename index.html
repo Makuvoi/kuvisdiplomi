@@ -3,74 +3,191 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kuvisprokkis</title>
-  <style>
-    :root {
-      --tausta: #faf8f5;
-      --teksti: #2b2b2b;
-      --korostus: #c0533a;
-    }
-
-    body {
-      margin: 0;
-      background: var(--tausta);
-      color: var(--teksti);
-      font-family: Georgia, "Times New Roman", serif;
-      line-height: 1.6;
-    }
-
-    main {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 48px 16px;
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      line-height: 1.2;
-      margin: 0 0 24px;
-      color: var(--korostus);
-    }
-
-    p {
-      font-size: 1.125rem;
-      margin: 0 0 32px;
-    }
-
-    figure {
-      margin: 0 0 32px;
-    }
-
-    img {
-      display: block;
-      width: 100%;
-      height: auto;
-      border-radius: 8px;
-      background: #e6e1da; /* näkyy, jos kuvaa ei vielä ole */
-      min-height: 200px;
-    }
-
-    figcaption {
-      font-size: 0.9rem;
-      color: #6b6b6b;
-      margin-top: 8px;
-    }
-  </style>
+  <title>Pilvi – Etusivu</title>
+  <meta name="description" content="[Lyhyt hakukonekuvaus Pilvestä: yksi lause siitä, mitä yritys tekee]">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="pilvet" aria-hidden="true">
+    <span class="pilvi pilvi--1"></span>
+    <span class="pilvi pilvi--2"></span>
+    <span class="pilvi pilvi--3"></span>
+    <span class="pilvi pilvi--4"></span>
+    <span class="pilvi pilvi--5"></span>
+  </div>
+
+  <header class="ylatunniste">
+    <div class="ylatunniste__sisalto">
+      <a class="logo" href="index.html">
+        <svg viewBox="0 0 64 40" aria-hidden="true">
+          <defs>
+            <linearGradient id="logoLiuku" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#6f8dff"/>
+              <stop offset="0.5" stop-color="#a27dff"/>
+              <stop offset="1" stop-color="#ff8fcf"/>
+            </linearGradient>
+          </defs>
+          <path fill="url(#logoLiuku)" d="M16 38a14 14 0 0 1-2-27.9A18 18 0 0 1 48.5 9 12 12 0 0 1 50 38Z"/>
+          <circle cx="32" cy="22" r="4" fill="#fff" opacity="0.9"/>
+        </svg>
+        Pilvi
+      </a>
+      <nav aria-label="Päävalikko">
+        <ul class="nav">
+          <li><a href="index.html" aria-current="page">Etusivu</a></li>
+          <li><a href="tuote.html">Tuote</a></li>
+          <li><a href="about.html">Meistä</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
   <main>
-    <h1>Otsikko tähän</h1>
+    <!-- HERO -->
+    <section class="hero">
+      <div>
+        <span class="ylaotsake ph">Lyhyt yläotsake, esim. yrityksen tunnuslause parilla sanalla</span>
+        <h1 class="liukuteksti ph">Pääotsikko: lyhyt, runollinen ja mieleenjäävä iskulause, joka kiteyttää ajatuksen tehostamisen ja pilvimäisen keveyden</h1>
+        <p class="johdanto ph">Johdantokappale (2–3 lausetta): kerrotaan, mikä Pilvi on ja mitä sen aivosiru lupaa käyttäjälle – selkeämpää ajattelua, rajatonta luovuutta – lämpimällä ja unenomaisella sävyllä.</p>
+        <div class="hero__napit">
+          <a class="nappi nappi--paa ph" href="tuote.html">Toimintakehotus: varaa oma siru</a>
+          <a class="nappi nappi--toissijainen ph" href="#sijoittajille">Toissijainen kehotus sijoittajille</a>
+        </div>
+      </div>
+      <div class="hero__kuva" aria-hidden="true">
+        <div class="orbi"></div>
+        <div class="orbi__rengas"></div>
+        <div class="orbi__rengas orbi__rengas--2"></div>
+      </div>
+    </section>
 
-    <p>
-      Tähän tulee leipäteksti. Siinä kerrotaan paljon kaikista hyvistä leivistä, joita merirosvot kokkailevat. Merenneidot rakastavat merirosvojen leipää.
-    </p>
+    <!-- MIKSI PILVI -->
+    <section class="osio ilmesty">
+      <div class="osio__otsake">
+        <span class="ylaotsake ph">Osion yläotsake, esim. "Miksi Pilvi"</span>
+        <h2 class="ph">Otsikko, joka kertoo mitä siru tekee käyttäjälle</h2>
+        <p class="johdanto ph">Lyhyt johdanto kolmeen tärkeimpään hyötyyn.</p>
+      </div>
+      <div class="kortit">
+        <article class="kortti">
+          <div class="ikoni" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a6 6 0 0 0-6 6c0 2.2 1.2 3.6 2 4.5V17h8v-3.5c.8-.9 2-2.3 2-4.5a6 6 0 0 0-6-6Z"/><path d="M9 21h6"/></svg>
+          </div>
+          <h3 class="ph">Hyöty 1: ajattelun selkeys</h3>
+          <p class="ph">2–3 lausetta siitä, miten siru auttaa keskittymään ja jäsentämään ajatuksia.</p>
+        </article>
+        <article class="kortti">
+          <div class="ikoni" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 1.8 4.7L18.5 9l-4.7 1.8L12 15.5l-1.8-4.7L5.5 9l4.7-1.3Z"/><path d="M19 15l.8 2.2L22 18l-2.2.8L19 21l-.8-2.2L16 18l2.2-.8Z"/></svg>
+          </div>
+          <h3 class="ph">Hyöty 2: luovuuden vapautuminen</h3>
+          <p class="ph">2–3 lausetta siitä, miten siru ruokkii mielikuvitusta ja uusia ideoita.</p>
+        </article>
+        <article class="kortti">
+          <div class="ikoni" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.2 8 9 4.6-.8 8-4.5 8-9V6Z"/><path d="m9 12 2 2 4-4"/></svg>
+          </div>
+          <h3 class="ph">Hyöty 3: turvallisuus ja yksityisyys</h3>
+          <p class="ph">2–3 lausetta siitä, miten käyttäjän ajatukset ja data pysyvät turvassa.</p>
+        </article>
+      </div>
+    </section>
 
-    <figure>
-      <img src="kuva.svg" alt="Silmälappupäinen merirosvokapteeni seisoo ruorissa sapeli koholla, taustalla salama, sade ja vaahtopäiset aallot.">
-      <figcaption>Merirosvokapteeni myrskyssä</figcaption>
-    </figure>
+    <!-- TUOTENOSTO -->
+    <section class="osio ilmesty">
+      <div class="kaksi">
+        <div class="kuvapaikka ph">Kuva: tuotekuva aivosirusta pehmeässä, pilvisessä valaistuksessa</div>
+        <div>
+          <span class="ylaotsake ph">Tuotteen nimi tai sukupolvi</span>
+          <h2 class="ph">Otsikko, joka esittelee lippulaivatuotteen</h2>
+          <p class="ph">Kappale tuotteen toiminnasta yleistajuisesti: miten siru asennetaan, miten se oppii käyttäjästään ja miltä sen käyttö tuntuu arjessa.</p>
+          <p class="ph">Toinen, lyhyempi kappale, jossa mainitaan saatavuus tai ennakkovarausetu.</p>
+          <a class="nappi nappi--paa ph" href="tuote.html">Linkki tuotesivulle</a>
+        </div>
+      </div>
+    </section>
 
-    <p>Hävisit pelin. lol</p>
+    <!-- LUVUT -->
+    <section class="osio ilmesty">
+      <div class="osio__otsake">
+        <h2 class="ph">Otsikko luvuille, esim. "Pilvi lukuina"</h2>
+      </div>
+      <div class="luvut">
+        <div class="kortti">
+          <div class="luku__arvo liukuteksti ph">Luku</div>
+          <p class="ph">Mitä luku kuvaa, esim. käyttäjien määrä</p>
+        </div>
+        <div class="kortti">
+          <div class="luku__arvo liukuteksti ph">Luku</div>
+          <p class="ph">Esim. ajattelunopeuden kasvu prosentteina</p>
+        </div>
+        <div class="kortti">
+          <div class="luku__arvo liukuteksti ph">Luku</div>
+          <p class="ph">Esim. tutkimusvuodet tai patentit</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- KÄYTTÄJÄKOKEMUKSET -->
+    <section class="osio ilmesty">
+      <div class="osio__otsake">
+        <span class="ylaotsake ph">Yläotsake, esim. "Kokemuksia"</span>
+        <h2 class="ph">Otsikko käyttäjien kokemuksille</h2>
+      </div>
+      <div class="kortit">
+        <figure class="kortti">
+          <blockquote class="ph">Lainaus käyttäjältä 1: lyhyt, tunteikas kuvaus siitä, miten siru muutti hänen ajatteluaan.</blockquote>
+          <figcaption class="henkilo__rooli ph">Käyttäjän nimi ja ammatti</figcaption>
+        </figure>
+        <figure class="kortti">
+          <blockquote class="ph">Lainaus käyttäjältä 2: kokemus luovasta työstä sirun kanssa.</blockquote>
+          <figcaption class="henkilo__rooli ph">Käyttäjän nimi ja ammatti</figcaption>
+        </figure>
+        <figure class="kortti">
+          <blockquote class="ph">Lainaus käyttäjältä 3: kokemus arjesta ja hyvinvoinnista.</blockquote>
+          <figcaption class="henkilo__rooli ph">Käyttäjän nimi ja ammatti</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- SIJOITTAJILLE -->
+    <section class="osio ilmesty" id="sijoittajille">
+      <div class="banneri">
+        <span class="ylaotsake ph">Yläotsake: "Sijoittajille"</span>
+        <h2 class="ph">Otsikko, joka houkuttelee sijoittajia: kasvu, visio ja markkinan koko</h2>
+        <p class="ph">Kappale yrityksen kasvusta, rahoituskierroksista ja tulevaisuuden suunnitelmista sijoittajan näkökulmasta.</p>
+        <div class="hero__napit" style="justify-content:center">
+          <a class="nappi nappi--toissijainen ph" href="about.html">Linkki tutkimukseen ja johtoon</a>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <footer class="alatunniste">
+    <div class="alatunniste__sisalto">
+      <div>
+        <h3>Pilvi</h3>
+        <p class="ph">Lyhyt yhden lauseen kuvaus yrityksestä</p>
+      </div>
+      <div>
+        <h3>Sivut</h3>
+        <ul>
+          <li><a href="index.html">Etusivu</a></li>
+          <li><a href="tuote.html">Tuote</a></li>
+          <li><a href="about.html">Meistä</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="ph">Yhteystiedot-otsikko</h3>
+        <p class="ph">Fiktiivinen osoite ja sähköposti</p>
+      </div>
+    </div>
+    <p class="alatunniste__pohja ph">Tekijänoikeusrivi ja maininta siitä, että Pilvi on fiktiivinen yritys</p>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
