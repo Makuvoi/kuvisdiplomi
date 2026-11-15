@@ -1,5 +1,31 @@
 // Pilvi – pieni yhteinen skripti (ei backendiä)
 
+// Parallaksitausta: kuva liukuu ylöspäin hitaammin kuin sivun sisältö.
+// Sivun alussa näkyy kuvan yläosa (tähtitaivas), lopussa alaosa (siluetti).
+const tausta = document.querySelector(".tausta");
+
+if (tausta && !window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+  let odottaa = false;
+
+  const paivitaTausta = () => {
+    const vieritettava = document.documentElement.scrollHeight - window.innerHeight;
+    const edistys = vieritettava > 0 ? Math.min(1, Math.max(0, window.scrollY / vieritettava)) : 0;
+    const liikevara = tausta.offsetHeight - window.innerHeight;
+    tausta.style.transform = `translate3d(0, ${-edistys * liikevara}px, 0)`;
+    odottaa = false;
+  };
+
+  window.addEventListener("scroll", () => {
+    if (!odottaa) {
+      odottaa = true;
+      requestAnimationFrame(paivitaTausta);
+    }
+  }, { passive: true });
+
+  window.addEventListener("resize", paivitaTausta);
+  paivitaTausta();
+}
+
 // Osiot ilmestyvät pehmeästi, kun ne vieritetään näkyviin
 const ilmestyvat = document.querySelectorAll(".ilmesty");
 

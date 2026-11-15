@@ -12,11 +12,14 @@
   --violetti: #a27dff;
   --pinkki: #ff8fcf;
 
-  --teksti: #2e2a4f;
-  --teksti-hento: #6b6790;
-  --lasi: rgba(255, 255, 255, 0.55);
-  --lasi-reuna: rgba(255, 255, 255, 0.8);
-  --varjo: 0 20px 60px -20px rgba(111, 141, 255, 0.35);
+  --yo: #0d0c24;
+  --teksti: #f4f1ff;
+  --teksti-hento: #c9c3ee;
+  --lasi: rgba(255, 255, 255, 0.08);
+  --lasi-reuna: rgba(255, 255, 255, 0.2);
+  --varjo: 0 20px 60px -20px rgba(5, 4, 25, 0.7);
+
+  color-scheme: dark;
 
   --liuku: linear-gradient(120deg, var(--sininen), var(--violetti) 50%, var(--pinkki));
   --liuku-pehmea: linear-gradient(160deg, var(--taivas-1), var(--taivas-2) 50%, var(--taivas-3));
@@ -36,8 +39,7 @@ body {
   font-size: 1.05rem;
   line-height: 1.7;
   color: var(--teksti);
-  background: var(--liuku-pehmea);
-  background-attachment: fixed;
+  background: var(--yo);
   overflow-x: hidden;
 }
 
@@ -54,7 +56,7 @@ h3 { font-size: 1.55rem; }
 
 p { margin: 0 0 1em; }
 
-a { color: var(--violetti); }
+a { color: #c7b3ff; }
 
 img { max-width: 100%; display: block; }
 
@@ -64,6 +66,24 @@ img { max-width: 100%; display: block; }
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+}
+
+/* ---------- Parallaksitaustakuva ----------
+   Kuva on sivua korkeampi ja liukuu script.js:n ohjaamana
+   hitaammin kuin muu sisältö. */
+.tausta {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 140vh;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    linear-gradient(160deg, rgba(111, 141, 255, 0.28), rgba(162, 125, 255, 0.2) 50%, rgba(255, 143, 207, 0.28)),
+    linear-gradient(rgba(13, 12, 36, 0.35), rgba(13, 12, 36, 0.35)),
+    url("kuvat/klemen-vrankar-lcT_p8kLCsc-unsplash.jpg") 20% 100% / cover no-repeat;
+  will-change: transform;
 }
 
 /* ---------- Taustan leijuvat pilvet ---------- */
@@ -83,11 +103,11 @@ img { max-width: 100%; display: block; }
   animation: leiju 28s ease-in-out infinite alternate;
 }
 
-.pilvi--1 { width: 520px; height: 300px; top: -80px;  left: -120px; background: rgba(255, 255, 255, 0.9); }
-.pilvi--2 { width: 420px; height: 260px; top: 30%;    right: -140px; background: rgba(162, 125, 255, 0.35); animation-duration: 34s; }
-.pilvi--3 { width: 600px; height: 320px; bottom: -120px; left: 20%; background: rgba(255, 143, 207, 0.3); animation-duration: 40s; }
-.pilvi--4 { width: 360px; height: 220px; top: 55%;    left: -100px; background: rgba(111, 141, 255, 0.3); animation-duration: 31s; }
-.pilvi--5 { width: 300px; height: 200px; top: 12%;    left: 55%;   background: rgba(255, 255, 255, 0.8); animation-duration: 26s; }
+.pilvi--1 { width: 520px; height: 300px; top: -80px;  left: -120px; background: rgba(255, 255, 255, 0.1); }
+.pilvi--2 { width: 420px; height: 260px; top: 30%;    right: -140px; background: rgba(162, 125, 255, 0.3); animation-duration: 34s; }
+.pilvi--3 { width: 600px; height: 320px; bottom: -120px; left: 20%; background: rgba(255, 143, 207, 0.22); animation-duration: 40s; }
+.pilvi--4 { width: 360px; height: 220px; top: 55%;    left: -100px; background: rgba(111, 141, 255, 0.25); animation-duration: 31s; }
+.pilvi--5 { width: 300px; height: 200px; top: 12%;    left: 55%;   background: rgba(255, 255, 255, 0.07); animation-duration: 26s; }
 
 @keyframes leiju {
   from { transform: translate(0, 0) scale(1); }
@@ -101,7 +121,7 @@ img { max-width: 100%; display: block; }
   z-index: 10;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  background: rgba(255, 255, 255, 0.4);
+  background: rgba(13, 12, 36, 0.4);
   border-bottom: 1px solid var(--lasi-reuna);
 }
 
@@ -149,7 +169,7 @@ img { max-width: 100%; display: block; }
   transition: background 0.3s;
 }
 
-.nav a:hover { background: rgba(255, 255, 255, 0.7); }
+.nav a:hover { background: rgba(255, 255, 255, 0.12); }
 
 .nav a[aria-current="page"] {
   background: var(--liuku);
@@ -177,7 +197,7 @@ main { display: block; }
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--violetti);
+  color: #d4c2ff;
   margin-bottom: 12px;
 }
 
@@ -405,7 +425,7 @@ figure.kortti { margin: 0; }
 .tuote--suositeltu {
   border: 2px solid transparent;
   background:
-    linear-gradient(rgba(255, 255, 255, 0.75), rgba(255, 255, 255, 0.75)) padding-box,
+    linear-gradient(rgba(30, 26, 72, 0.85), rgba(30, 26, 72, 0.85)) padding-box,
     var(--liuku) border-box;
 }
 
@@ -479,7 +499,7 @@ figure.kortti { margin: 0; }
   padding: 14px 18px;
   border-radius: 16px;
   border: 1px solid var(--lasi-reuna);
-  background: rgba(255, 255, 255, 0.7);
+  background: rgba(255, 255, 255, 0.1);
   font: inherit;
   color: var(--teksti);
   transition: border-color 0.2s, box-shadow 0.2s;
@@ -492,6 +512,8 @@ figure.kortti { margin: 0; }
   border-color: var(--violetti);
   box-shadow: 0 0 0 4px rgba(162, 125, 255, 0.2);
 }
+
+.kentta option { background: #1d1a45; color: var(--teksti); }
 
 .valinta {
   display: flex;
@@ -576,7 +598,7 @@ figure.kortti { margin: 0; }
 
 .aikajana__vuosi {
   font-weight: 700;
-  color: var(--violetti);
+  color: #d4c2ff;
 }
 
 /* ---------- Johtajat ---------- */
@@ -597,7 +619,7 @@ figure.kortti { margin: 0; }
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  background: var(--liuku-pehmea);
+  background: rgba(20, 18, 52, 0.9);
   font-size: 0.75rem;
   font-style: italic;
   color: var(--teksti-hento);
@@ -606,7 +628,7 @@ figure.kortti { margin: 0; }
 }
 
 .henkilo__rooli {
-  color: var(--violetti);
+  color: #d4c2ff;
   font-weight: 600;
   margin-bottom: 12px;
 }
@@ -615,7 +637,7 @@ figure.kortti { margin: 0; }
 .alatunniste {
   margin-top: 60px;
   padding: 48px 16px 32px;
-  background: rgba(255, 255, 255, 0.35);
+  background: rgba(13, 12, 36, 0.5);
   border-top: 1px solid var(--lasi-reuna);
   backdrop-filter: blur(12px);
 }
@@ -635,14 +657,21 @@ figure.kortti { margin: 0; }
 .alatunniste ul { list-style: none; padding: 0; margin: 0; }
 .alatunniste li { margin-bottom: 6px; }
 .alatunniste a { color: var(--teksti-hento); text-decoration: none; }
-.alatunniste a:hover { color: var(--violetti); }
+.alatunniste a:hover { color: #d4c2ff; }
 
 .alatunniste__pohja {
   max-width: var(--leveys);
   margin: 32px auto 0;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.7);
+  border-top: 1px solid var(--lasi-reuna);
   font-size: 0.85rem;
+  color: var(--teksti-hento);
+  text-align: center;
+}
+
+.kuvakrediitti {
+  margin: 8px 0 0;
+  font-size: 0.8rem;
   color: var(--teksti-hento);
   text-align: center;
 }
