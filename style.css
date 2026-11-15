@@ -414,9 +414,9 @@ figure.kortti { margin: 0; }
 
 /* Aivot: kuvaa suurennetaan hieman, jotta aivot erottuvat */
 .kortti--selkeys::before {
-  width: 140%;
+  width: 173%;
   aspect-ratio: 900 / 684;
-  transform: translate(-50%, -20%);
+  transform: translate(-49%, -22%);
   background-image:
     linear-gradient(to bottom, rgba(21, 19, 47, 0) 45%, #15132f 92%),
     url("kuvat/milad-fakurian-58Z17lnVS4U-unsplash-pieni.jpg");
@@ -425,7 +425,7 @@ figure.kortti { margin: 0; }
 /* Hehkulamppu */
 .kortti--luovuus::before {
   aspect-ratio: 900 / 1125;
-  transform: translate(-50%, -24%);
+  transform: translate(-50%, -20%);
   background-image:
     linear-gradient(to bottom, rgba(21, 19, 47, 0) 70%, #15132f 100%),
     url("kuvat/diego-ph-fIq0tET6llw-unsplash-pieni.jpg");
@@ -434,7 +434,7 @@ figure.kortti { margin: 0; }
 /* Tanssija */
 .kortti--liike::before {
   aspect-ratio: 900 / 1190;
-  transform: translate(-50%, -40%);
+  transform: translate(-50%, -32%);
   background-image:
     linear-gradient(to bottom, rgba(21, 19, 47, 0) 75%, #15132f 100%),
     url("kuvat/drew-colins-YMXzVtd8awg-unsplash-pieni.jpg");
