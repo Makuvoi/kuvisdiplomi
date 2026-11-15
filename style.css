@@ -66,13 +66,6 @@ img { max-width: 100%; display: block; }
   color: transparent;
 }
 
-/* Paikanvaraajateksti – kuvaus siitä, mitä tekstiä kohtaan tulee */
-.ph {
-  font-style: italic;
-}
-.ph::before { content: "[ "; opacity: 0.5; }
-.ph::after  { content: " ]"; opacity: 0.5; }
-
 /* ---------- Taustan leijuvat pilvet ---------- */
 .pilvet {
   position: fixed;
