@@ -76,14 +76,33 @@ img { max-width: 100%; display: block; }
   top: 0;
   left: 0;
   right: 0;
-  height: 140vh;
+  height: 165vh; /* mitä korkeampi, sitä nopeammin kuva liikkuu */
   z-index: -2;
   pointer-events: none;
+  background: url("kuvat/klemen-vrankar-lcT_p8kLCsc-unsplash.jpg") 20% 100% / cover no-repeat;
+  will-change: transform;
+}
+
+/* Sivukohtaiset taustakuvat */
+.tausta--tuote {
+  background-image: url("kuvat/luca-bravo-a_hPPrncGlQ-unsplash.jpg");
+  background-position: 50% 100%;
+}
+
+.tausta--meista {
+  background-image: url("kuvat/thomas-chizzali-K-ENC7LNABA-unsplash.jpg");
+  background-position: 50% 100%;
+}
+
+/* Sävytys kuvan päällä: pitää värit sinisessä, violetissa ja pinkissä
+   ja tekstin luettavana */
+.tausta::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   background:
     linear-gradient(160deg, rgba(111, 141, 255, 0.28), rgba(162, 125, 255, 0.2) 50%, rgba(255, 143, 207, 0.28)),
-    linear-gradient(rgba(13, 12, 36, 0.35), rgba(13, 12, 36, 0.35)),
-    url("kuvat/klemen-vrankar-lcT_p8kLCsc-unsplash.jpg") 20% 100% / cover no-repeat;
-  will-change: transform;
+    rgba(13, 12, 36, 0.35);
 }
 
 /* ---------- Taustan leijuvat pilvet ---------- */
