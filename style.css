@@ -375,38 +375,69 @@ figure.kortti { margin: 0; }
   line-height: 1.4;
 }
 
-/* Kortit, joiden taustalla on valokuva. Tumma liuku alaosassa
-   pitää tekstin luettavana. */
+/* Kortit, joiden taustalla on valokuva.
+   Kuva on omana kerroksenaan (::before) kortin yläosassa, ja sitä
+   nostetaan ylöspäin translate-arvolla niin, että kuvan pääaihe
+   näkyy tekstin yläpuolella. Kuvan alareuna liukuu tummaan, ja
+   ::after tummentaa tekstin alueen. */
 .kortti--kuva {
-  min-height: 420px;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 480px;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  overflow: hidden;
-  background-size: cover;
-  background-repeat: no-repeat;
+  background: #15132f;
   text-shadow: 0 1px 12px rgba(13, 12, 36, 0.6);
 }
 
-.kortti--selkeys {
-  background-image:
-    linear-gradient(to bottom, rgba(13, 12, 36, 0) 25%, rgba(13, 12, 36, 0.9) 78%),
-    url("kuvat/ryan-hutton-Jztmx9yqjBw-unsplash-pieni.jpg");
-  background-position: center, 40% 50%;
+.kortti--kuva::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 100%;
+  z-index: -2;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-.kortti--luovuus {
+.kortti--kuva::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(to bottom, rgba(21, 19, 47, 0) 38%, rgba(21, 19, 47, 0.8) 60%, #15132f 85%);
+}
+
+/* Aivot: kuvaa suurennetaan hieman, jotta aivot erottuvat */
+.kortti--selkeys::before {
+  width: 140%;
+  aspect-ratio: 900 / 684;
+  transform: translate(-50%, -20%);
   background-image:
-    linear-gradient(to bottom, rgba(13, 12, 36, 0) 25%, rgba(13, 12, 36, 0.9) 78%),
+    linear-gradient(to bottom, rgba(21, 19, 47, 0) 45%, #15132f 92%),
+    url("kuvat/milad-fakurian-58Z17lnVS4U-unsplash-pieni.jpg");
+}
+
+/* Hehkulamppu */
+.kortti--luovuus::before {
+  aspect-ratio: 900 / 1125;
+  transform: translate(-50%, -24%);
+  background-image:
+    linear-gradient(to bottom, rgba(21, 19, 47, 0) 70%, #15132f 100%),
     url("kuvat/diego-ph-fIq0tET6llw-unsplash-pieni.jpg");
-  background-position: center, 50% 30%;
 }
 
-.kortti--liike {
+/* Tanssija */
+.kortti--liike::before {
+  aspect-ratio: 900 / 1190;
+  transform: translate(-50%, -40%);
   background-image:
-    linear-gradient(to bottom, rgba(13, 12, 36, 0) 25%, rgba(13, 12, 36, 0.9) 78%),
+    linear-gradient(to bottom, rgba(21, 19, 47, 0) 75%, #15132f 100%),
     url("kuvat/drew-colins-YMXzVtd8awg-unsplash-pieni.jpg");
-  background-position: center, 50% 45%;
 }
 
 /* ---------- Kaksipalstainen osio ---------- */
