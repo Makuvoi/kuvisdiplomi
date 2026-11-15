@@ -259,52 +259,62 @@ main { display: block; }
   place-items: center;
 }
 
-/* Hehkuva "siru" -orbi herossa */
-.orbi {
-  width: 78%;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.95), transparent 45%),
-    radial-gradient(circle at 70% 70%, rgba(255, 143, 207, 0.8), transparent 55%),
-    radial-gradient(circle at 50% 50%, rgba(162, 125, 255, 0.9), rgba(111, 141, 255, 0.7));
-  box-shadow:
-    0 0 80px rgba(162, 125, 255, 0.55),
-    0 0 160px rgba(255, 143, 207, 0.35);
-  animation: syke 6s ease-in-out infinite;
-}
-
-.orbi__rengas {
+/* Herokuva: sininen musteroiske, jonka keskiaukossa hehkuva pallo.
+   Roiskeen aukon keskipiste on kuvassa kohdassa (395, 396) / 800
+   ja säde n. 148 / 800. */
+.roiske {
   position: absolute;
-  inset: 4%;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.8);
-  animation: pyori 30s linear infinite;
+  inset: 0;
+  background: linear-gradient(135deg, #9db8ff, #5b7cff 50%, #3b4fd6);
+  -webkit-mask: url("kuvat/libre-clip-art-pSjMWyeS92w-unsplash.svg") center / contain no-repeat;
+  mask: url("kuvat/libre-clip-art-pSjMWyeS92w-unsplash.svg") center / contain no-repeat;
 }
 
-.orbi__rengas::after {
+.pallo {
+  position: absolute;
+  left: 49.4%;
+  top: 49.5%;
+  width: 38%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  overflow: hidden;
+  isolation: isolate;
+  animation: hehku 5s ease-in-out infinite;
+}
+
+/* Pyörivä, sumea liukuväri pallon sisällä */
+.pallo::before {
   content: "";
   position: absolute;
-  top: -6px;
-  left: 50%;
-  width: 12px;
-  height: 12px;
+  inset: -40%;
+  background: conic-gradient(from 0deg, #6f8dff, #a27dff, #ff8fcf, #8fd3ff, #a27dff, #6f8dff);
+  filter: blur(18px);
+  animation: pyori 9s linear infinite;
+}
+
+/* Valoheijastus ja vastakkaiseen suuntaan kiertävä pinkki hehku */
+.pallo::after {
+  content: "";
+  position: absolute;
+  inset: 0;
   border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 0 16px #fff, 0 0 30px var(--pinkki);
+  background:
+    radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.6), transparent 36%),
+    radial-gradient(circle at 72% 72%, rgba(255, 143, 207, 0.55), transparent 50%);
+  mix-blend-mode: screen;
+  animation: pyori 14s linear infinite reverse;
 }
 
-.orbi__rengas--2 {
-  inset: -4%;
-  border-style: dashed;
-  border-color: rgba(162, 125, 255, 0.5);
-  animation-duration: 50s;
-  animation-direction: reverse;
-}
-
-@keyframes syke {
-  0%, 100% { transform: scale(1); }
-  50%      { transform: scale(1.04); }
+@keyframes hehku {
+  0%, 100% {
+    filter: brightness(1) saturate(1);
+    box-shadow: 0 0 40px rgba(162, 125, 255, 0.5), 0 0 90px rgba(255, 143, 207, 0.25);
+  }
+  50% {
+    filter: brightness(1.2) saturate(1.15);
+    box-shadow: 0 0 70px rgba(162, 125, 255, 0.85), 0 0 150px rgba(255, 143, 207, 0.45);
+  }
 }
 
 @keyframes pyori { to { transform: rotate(360deg); } }
@@ -365,19 +375,39 @@ figure.kortti { margin: 0; }
   line-height: 1.4;
 }
 
-.ikoni {
-  width: 56px;
-  height: 56px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  background: var(--liuku);
-  color: #fff;
-  margin-bottom: 20px;
-  box-shadow: 0 8px 24px -6px rgba(162, 125, 255, 0.6);
+/* Kortit, joiden taustalla on valokuva. Tumma liuku alaosassa
+   pitää tekstin luettavana. */
+.kortti--kuva {
+  min-height: 420px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  overflow: hidden;
+  background-size: cover;
+  background-repeat: no-repeat;
+  text-shadow: 0 1px 12px rgba(13, 12, 36, 0.6);
 }
 
-.ikoni svg { width: 28px; height: 28px; }
+.kortti--selkeys {
+  background-image:
+    linear-gradient(to bottom, rgba(13, 12, 36, 0) 25%, rgba(13, 12, 36, 0.9) 78%),
+    url("kuvat/ryan-hutton-Jztmx9yqjBw-unsplash-pieni.jpg");
+  background-position: center, 40% 50%;
+}
+
+.kortti--luovuus {
+  background-image:
+    linear-gradient(to bottom, rgba(13, 12, 36, 0) 25%, rgba(13, 12, 36, 0.9) 78%),
+    url("kuvat/diego-ph-fIq0tET6llw-unsplash-pieni.jpg");
+  background-position: center, 50% 30%;
+}
+
+.kortti--liike {
+  background-image:
+    linear-gradient(to bottom, rgba(13, 12, 36, 0) 25%, rgba(13, 12, 36, 0.9) 78%),
+    url("kuvat/drew-colins-YMXzVtd8awg-unsplash-pieni.jpg");
+  background-position: center, 50% 45%;
+}
 
 /* ---------- Kaksipalstainen osio ---------- */
 .kaksi {
