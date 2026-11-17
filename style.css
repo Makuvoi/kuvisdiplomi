@@ -338,7 +338,7 @@ main { display: block; }
   position: relative;
   isolation: isolate;
   display: inline-block;
-  padding: 17px 96px 15px 40px;
+  padding: 19px 100px 13px 38px;
   border: none;
   background: none;
   font-family: "Showclick", "Quicksand", "Segoe UI", system-ui, sans-serif;
@@ -354,7 +354,7 @@ main { display: block; }
 .nappi::before {
   content: "";
   position: absolute;
-  inset: -2px -8px;
+  inset: -1px -2px;
   z-index: -1;
   -webkit-mask: url("kuvat/suora-siveltimenveto-napin-muoto_sheikh-shahoriar-haque.svg") center / 100% 100% no-repeat;
   mask: url("kuvat/suora-siveltimenveto-napin-muoto_sheikh-shahoriar-haque.svg") center / 100% 100% no-repeat;
