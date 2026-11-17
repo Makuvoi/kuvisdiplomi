@@ -338,13 +338,13 @@ main { display: block; }
   position: relative;
   isolation: isolate;
   display: inline-block;
-  padding: 14px 96px 24px 40px;
+  padding: 17px 96px 15px 40px;
   border: none;
   background: none;
   font-family: "Showclick", "Quicksand", "Segoe UI", system-ui, sans-serif;
-  font-size: 1.2rem;
-  font-weight: 400;
-  line-height: 1.4;
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 0.6;
   color: #000;
   text-decoration: none;
   cursor: pointer;
