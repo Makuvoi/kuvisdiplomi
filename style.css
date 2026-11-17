@@ -270,6 +270,21 @@ main { display: block; }
   mask: url("kuvat/musteroiske-jossa-pyorea-aukko_libre-clip-art.svg") center / contain no-repeat;
 }
 
+/* Hehkuva pisara-pallo. Sama pallo on herossa (.pallo) ja tuotesivun
+   mallikorteissa (.tuote__siru). Sävyt tulevat muuttujista, joten
+   mallikohtaiset versiot vaihtavat vain muuttujien arvot. */
+.pallo,
+.tuote__siru {
+  --pallo-varit: #6f8dff, #a27dff, #ff8fcf, #8fd3ff, #a27dff, #6f8dff;
+  --pallo-heijastus: rgba(255, 143, 207, 0.55);
+  --pallo-hehku-1: 162, 125, 255;
+  --pallo-hehku-2: 255, 143, 207;
+  border-radius: 50%;
+  overflow: hidden;
+  isolation: isolate;
+  animation: hehku 5s ease-in-out infinite;
+}
+
 .pallo {
   position: absolute;
   left: 49.4%;
@@ -277,31 +292,29 @@ main { display: block; }
   width: 38%;
   aspect-ratio: 1;
   transform: translate(-50%, -50%);
-  border-radius: 50%;
-  overflow: hidden;
-  isolation: isolate;
-  animation: hehku 5s ease-in-out infinite;
 }
 
 /* Pyörivä, sumea liukuväri pallon sisällä */
-.pallo::before {
+.pallo::before,
+.tuote__siru::before {
   content: "";
   position: absolute;
   inset: -40%;
-  background: conic-gradient(from 0deg, #6f8dff, #a27dff, #ff8fcf, #8fd3ff, #a27dff, #6f8dff);
+  background: conic-gradient(from 0deg, var(--pallo-varit));
   filter: blur(18px);
   animation: pyori 9s linear infinite;
 }
 
-/* Valoheijastus ja vastakkaiseen suuntaan kiertävä pinkki hehku */
-.pallo::after {
+/* Valoheijastus ja vastakkaiseen suuntaan kiertävä hehku */
+.pallo::after,
+.tuote__siru::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: 50%;
   background:
     radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.6), transparent 36%),
-    radial-gradient(circle at 72% 72%, rgba(255, 143, 207, 0.55), transparent 50%);
+    radial-gradient(circle at 72% 72%, var(--pallo-heijastus), transparent 50%);
   mix-blend-mode: screen;
   animation: pyori 14s linear infinite reverse;
 }
@@ -309,11 +322,11 @@ main { display: block; }
 @keyframes hehku {
   0%, 100% {
     filter: brightness(1) saturate(1);
-    box-shadow: 0 0 40px rgba(162, 125, 255, 0.5), 0 0 90px rgba(255, 143, 207, 0.25);
+    box-shadow: 0 0 40px rgba(var(--pallo-hehku-1), 0.5), 0 0 90px rgba(var(--pallo-hehku-2), 0.25);
   }
   50% {
     filter: brightness(1.2) saturate(1.15);
-    box-shadow: 0 0 70px rgba(162, 125, 255, 0.85), 0 0 150px rgba(255, 143, 207, 0.45);
+    box-shadow: 0 0 70px rgba(var(--pallo-hehku-1), 0.85), 0 0 150px rgba(var(--pallo-hehku-2), 0.45);
   }
 }
 
@@ -464,6 +477,33 @@ figure.kortti { margin: 0; }
     url("kuvat/tanssija-hyppaa-auringonlaskun-meressa_drew-colins-pieni.jpg");
 }
 
+/* Tuotesivu, vaihe 1: kannettava tietokone */
+.kortti--varaus::before {
+  aspect-ratio: 900 / 1350;
+  transform: translate(-50%, -12%);
+  background-image:
+    linear-gradient(to bottom, rgba(21, 19, 47, 0) 60%, #15132f 90%),
+    url("kuvat/nainen-kayttaa-kannettavaa-tietokonetta_ellie-ellien-pieni.jpg");
+}
+
+/* Tuotesivu, vaihe 2: kirurgi */
+.kortti--asennus::before {
+  aspect-ratio: 900 / 1125;
+  transform: translate(-50%, -6%);
+  background-image:
+    linear-gradient(to bottom, rgba(21, 19, 47, 0) 60%, #15132f 90%),
+    url("kuvat/kirurgi-leikkaussalissa_david-akinwale-pieni.jpg");
+}
+
+/* Tuotesivu, vaihe 3: hehkuvat aivot kämmenen yllä */
+.kortti--kyvyt::before {
+  aspect-ratio: 900 / 1600;
+  transform: translate(-50%, -17%);
+  background-image:
+    linear-gradient(to bottom, rgba(21, 19, 47, 0) 50%, #15132f 75%),
+    url("kuvat/hehkuvat-aivot-kammenen-ylla_tsd-studio-pieni.jpg");
+}
+
 /* ---------- Kaksipalstainen osio ---------- */
 .kaksi {
   display: grid;
@@ -547,15 +587,29 @@ figure.kortti { margin: 0; }
   white-space: nowrap;
 }
 
+/* Mallikorttien pallo: sama kuin herossa, pienempänä.
+   Pallon tyylit ja animaatio ovat herokuvan kohdalla. */
 .tuote__siru {
+  position: relative;
   width: 96px;
   height: 96px;
-  margin: 0 auto 20px;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 30% 30%, #fff, transparent 50%),
-    var(--liuku);
-  box-shadow: 0 0 40px rgba(162, 125, 255, 0.5);
+  margin: 0 auto 24px;
+}
+
+/* Pisara Pro: tummansinisempi */
+.tuote__siru--pro {
+  --pallo-varit: #1b2f8f, #3b5bdb, #22237a, #4f8dff, #2a3fbf, #1b2f8f;
+  --pallo-heijastus: rgba(79, 141, 255, 0.5);
+  --pallo-hehku-1: 59, 91, 219;
+  --pallo-hehku-2: 40, 60, 180;
+}
+
+/* Pisara Pro Ultra Super Max: pinkimpi ja violetimpi */
+.tuote__siru--max {
+  --pallo-varit: #b84dff, #ff5fc8, #8a3dff, #ff9ad9, #c35cff, #b84dff;
+  --pallo-heijastus: rgba(255, 95, 200, 0.65);
+  --pallo-hehku-1: 184, 77, 255;
+  --pallo-hehku-2: 255, 95, 200;
 }
 
 .tuote__hinta {
