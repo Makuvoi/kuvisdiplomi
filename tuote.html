@@ -135,56 +135,54 @@
     <!-- VARAUSLOMAKE -->
     <section class="osio ilmesty" id="varaa">
       <div class="osio__otsake">
-        <span class="ylaotsake ph">Yläotsake: "Varaa"</span>
-        <h2 class="ph">Otsikko varaukselle, esim. kutsu liittyä ensimmäisten käyttäjien joukkoon</h2>
-        <p class="johdanto ph">Lyhyt kuvaus varausprosessista ja siitä, mitä varauksen jälkeen tapahtuu.</p>
+        <h2 class="ph">Tietosi ja asennuksen ajankohta</h2>
       </div>
 
       <div class="kortti lomake">
         <form id="varauslomake">
           <div class="lomake__rivi">
             <div class="kentta">
-              <label for="etunimi" class="ph">Etunimi-kentän nimi</label>
+              <label for="etunimi" class="ph">Etunimet</label>
               <input id="etunimi" name="etunimi" type="text" autocomplete="given-name" required>
             </div>
             <div class="kentta">
-              <label for="sukunimi" class="ph">Sukunimi-kentän nimi</label>
+              <label for="sukunimi" class="ph">Sukunimi</label>
               <input id="sukunimi" name="sukunimi" type="text" autocomplete="family-name" required>
             </div>
           </div>
           <div class="kentta">
-            <label for="sposti" class="ph">Sähköposti-kentän nimi</label>
+            <label for="sposti" class="ph">Sähköposti</label>
             <input id="sposti" name="sposti" type="email" autocomplete="email" required>
           </div>
           <div class="lomake__rivi">
             <div class="kentta">
-              <label for="malli" class="ph">Mallin valinta</label>
+              <label for="malli" class="ph">Malli</label>
               <select id="malli" name="malli">
-                <option value="malli-1">Mallin 1 nimi</option>
-                <option value="malli-2" selected>Mallin 2 nimi</option>
-                <option value="malli-3">Mallin 3 nimi</option>
+                <option value="malli-1">Pisara</option>
+                <option value="malli-2" selected>Pisara Pro</option>
+                <option value="malli-3">Pisara Pro Ultra Super Max</option>
               </select>
             </div>
             <div class="kentta">
-              <label for="paiva" class="ph">Toivottu asennuspäivä</label>
+              <label for="paiva" class="ph">Valitse asennuspäivä</label>
               <input id="paiva" name="paiva" type="date">
             </div>
           </div>
           <div class="kentta">
-            <label for="toive" class="ph">Vapaa tekstikenttä: mihin haluaisit käyttää sirua?</label>
-            <textarea id="toive" name="toive" rows="4"></textarea>
+            <label for="toive" class="ph">Muuta huomioitavaa</label>
+            <textarea id="toive" name="toive" rows="3"></textarea>
           </div>
           <label class="valinta">
             <input type="checkbox" required>
-            <span class="ph">Hyväksyntäteksti: leikkisä suostumus ehtoihin ja tietosuojaan</span>
+            <span class="ph">Hyväksyn käyttöehdot ja tietosuojakäytänteet</span>
           </label>
-          <button class="nappi nappi--paa ph" type="submit">Lähetä varaus -nappi</button>
+          <button class="nappi nappi--paa ph" type="submit">Varaa Pisarasi nyt</button>
         </form>
 
         <div class="vahvistus" id="vahvistus" role="status">
           <div class="tuote__siru" aria-hidden="true"></div>
-          <h3 class="liukuteksti ph">Kiitosotsikko varauksen jälkeen</h3>
-          <p class="ph">Vahvistusviesti: varaus on vastaanotettu ja mitä seuraavaksi tapahtuu.</p>
+          <h3 class="liukuteksti ph">Kiitos varauksestasi!</h3>
+          <p class="ph">Varauksesi on vastaanotettu.</p>
         </div>
       </div>
     </section>
@@ -192,25 +190,20 @@
     <!-- UKK -->
     <section class="osio ilmesty">
       <div class="osio__otsake">
-        <span class="ylaotsake ph">Yläotsake: "UKK"</span>
-        <h2 class="ph">Otsikko usein kysytyille kysymyksille</h2>
+        <h2 class="ph">Usein kysyttyjä kysymyksiä</h2>
       </div>
       <div class="ukk">
         <details>
-          <summary class="ph">Kysymys 1, esim. turvallisuudesta</summary>
-          <p class="ph">Vastaus kysymykseen 1.</p>
+          <summary class="ph">Onko Pisara turvallinen?</summary>
+          <p class="ph">Kyllä, Pisaran turvallisuuden eteen on tehty valtavasti tutkimusta. Voimme itsevarmoina vakuuttaa, että Pisaraan ei sisälly juuri minkäänlaisia terveysriskejä.</p>
         </details>
         <details>
-          <summary class="ph">Kysymys 2, esim. asennuksesta</summary>
-          <p class="ph">Vastaus kysymykseen 2.</p>
+          <summary class="ph">Miltä Pisaran käyttäminen tuntuu?</summary>
+          <p class="ph">Aluksi ei juuri miltään, mutta ajan kuluessa tulet huomaamaan, kuinka kykysi tulevat kasvamaan kaikilla ajattelusi osa-alueilla. Ajattelusta tulee helppoa ja vaivatonta. On kuin aatokset ja ideat virtaisivat lävitsesi.</p>
         </details>
         <details>
-          <summary class="ph">Kysymys 3, esim. akunkestosta ja päivityksistä</summary>
-          <p class="ph">Vastaus kysymykseen 3.</p>
-        </details>
-        <details>
-          <summary class="ph">Kysymys 4, esim. sirun poistamisesta</summary>
-          <p class="ph">Vastaus kysymykseen 4.</p>
+          <summary class="ph">Voiko sirun poistaa?</summary>
+          <p class="ph">Sirun poistamista ei suositella, sillä se voi johtaa ennalta-arvaamattomiin terveysvaikutuksiin. Älä kuitenkaan huoli. Pisara pitää sinusta hyvän huolen.</p>
         </details>
       </div>
     </section>
