@@ -882,6 +882,69 @@ figure.kortti { margin: 0; }
   height: 80px;
 }
 
+/* ---------- Satunnaiset glitch-efektit ----------
+   script.js lisää luokan satunnaiseen näkyvään kohteeseen hetkeksi.
+   Liike tehdään translate-ominaisuudella (ei transform), jotta se ei
+   kumoa elementtien omia transform-arvoja tai animaatioita. */
+
+/* Otsikot ja logo: pieni nykäisy ja punainen/syaani värisiirtymä */
+.glitch-teksti {
+  animation: glitch-teksti 0.32s steps(1, end);
+}
+
+@keyframes glitch-teksti {
+  0%   { translate: 0 0; filter: none; }
+  15%  { translate: -2px 0; filter: drop-shadow(2px 0 rgba(255, 60, 140, 0.7)) drop-shadow(-2px 0 rgba(80, 220, 255, 0.7)); }
+  35%  { translate: 2px 1px; filter: drop-shadow(-2px 0 rgba(255, 60, 140, 0.6)) drop-shadow(2px 0 rgba(80, 220, 255, 0.6)); opacity: 0.85; }
+  55%  { translate: 0 0; filter: none; opacity: 1; }
+  70%  { translate: 1px 0; filter: drop-shadow(1px 0 rgba(255, 60, 140, 0.5)) drop-shadow(-1px 0 rgba(80, 220, 255, 0.5)); }
+  100% { translate: 0 0; filter: none; }
+}
+
+/* Korttien kuvat: kuva nytkähtää ja värit vääristyvät hetken */
+.glitch-kuva::before {
+  animation: glitch-kuva 0.28s steps(1, end);
+}
+
+@keyframes glitch-kuva {
+  0%   { translate: 0 0; filter: none; }
+  20%  { translate: 4px 0; filter: hue-rotate(35deg) saturate(1.5); }
+  45%  { translate: -3px 0; filter: hue-rotate(-25deg) brightness(1.15); }
+  70%  { translate: 1px 0; filter: none; }
+  100% { translate: 0 0; filter: none; }
+}
+
+/* Herokuvan roiske: lyhyt välähdys ja värisiirtymä */
+.glitch-roiske {
+  animation: glitch-roiske 0.3s steps(1, end);
+}
+
+@keyframes glitch-roiske {
+  0%   { translate: 0 0; filter: none; }
+  25%  { translate: 3px -1px; filter: hue-rotate(40deg) drop-shadow(-3px 0 rgba(255, 60, 140, 0.6)); }
+  50%  { translate: -2px 0; filter: none; opacity: 0.8; }
+  75%  { translate: 1px 0; filter: hue-rotate(-20deg); opacity: 1; }
+  100% { translate: 0 0; filter: none; }
+}
+
+/* Ohut vaakaviiva, joka välähtää satunnaisessa kohdassa ruutua */
+.glitch-viiva {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  pointer-events: none;
+  background: linear-gradient(90deg, transparent, rgba(200, 180, 255, 0.18) 20%, rgba(255, 140, 210, 0.22) 60%, transparent);
+  mix-blend-mode: screen;
+  animation: glitch-viiva 0.18s steps(2, end) forwards;
+}
+
+@keyframes glitch-viiva {
+  0%   { opacity: 1; translate: 0 0; }
+  50%  { opacity: 0.6; translate: 0 6px; }
+  100% { opacity: 0; translate: 0 6px; }
+}
+
 /* ---------- Ilmestymisanimaatio ---------- */
 .ilmesty {
   opacity: 0;
