@@ -320,33 +320,49 @@ main { display: block; }
 @keyframes pyori { to { transform: rotate(360deg); } }
 
 /* ---------- Napit ---------- */
+/* Napin muoto on siveltimenveto: ::before-kerros täytetään värillä ja
+   rajataan vedon muotoon maskilla, joka venyy napin kokoiseksi.
+   Varjo tehdään drop-shadow-suodattimella, koska se seuraa muotoa. */
 .nappi {
+  position: relative;
+  isolation: isolate;
   display: inline-block;
-  padding: 14px 30px;
-  border-radius: 999px;
+  padding: 18px 64px 18px 36px;
   border: none;
+  background: none;
   font: inherit;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
-  transition: transform 0.25s, box-shadow 0.25s;
+  transition: transform 0.25s, filter 0.25s;
+}
+
+.nappi::before {
+  content: "";
+  position: absolute;
+  inset: -2px -8px;
+  z-index: -1;
+  -webkit-mask: url("kuvat/suora-siveltimenveto-napin-muoto_sheikh-shahoriar-haque.svg") center / 100% 100% no-repeat;
+  mask: url("kuvat/suora-siveltimenveto-napin-muoto_sheikh-shahoriar-haque.svg") center / 100% 100% no-repeat;
 }
 
 .nappi--paa {
-  background: var(--liuku);
   color: #fff;
-  box-shadow: 0 10px 30px -8px rgba(162, 125, 255, 0.7);
+  filter: drop-shadow(0 8px 16px rgba(162, 125, 255, 0.55));
 }
 
-.nappi--toissijainen {
-  background: var(--lasi);
-  color: var(--teksti);
-  border: 1px solid var(--lasi-reuna);
+.nappi--paa::before { background: var(--liuku); }
+
+.nappi--toissijainen { color: var(--teksti); }
+
+.nappi--toissijainen::before {
+  background: rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
 
-.nappi:hover { transform: translateY(-2px); box-shadow: 0 16px 40px -10px rgba(162, 125, 255, 0.8); }
-.nappi:focus-visible { outline: 3px solid var(--violetti); outline-offset: 3px; }
+.nappi:hover { transform: translateY(-2px); filter: drop-shadow(0 12px 22px rgba(162, 125, 255, 0.8)); }
+.nappi:focus-visible { outline: 3px solid var(--violetti); outline-offset: 6px; }
 
 /* ---------- Lasikortit ---------- */
 .kortit {
@@ -493,7 +509,8 @@ figure.kortti { margin: 0; }
 }
 
 .banneri .ylaotsake { color: rgba(255, 255, 255, 0.85); }
-.banneri .nappi--toissijainen { color: #fff; background: rgba(255, 255, 255, 0.2); }
+.banneri .nappi--toissijainen { color: #fff; }
+.banneri .nappi--toissijainen::before { background: rgba(255, 255, 255, 0.3); }
 
 /* ---------- Tuotteet ---------- */
 .tuote {
@@ -764,15 +781,6 @@ figure.kortti { margin: 0; }
   font-size: 0.75rem;
   text-align: left;
   opacity: 0.85;
-}
-
-/* Herokuvan (musteroiskeen) tekijä kuvan alla */
-.kuvakrediitti--hero {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: -2em;
-  margin: 0;
 }
 
 /* ---------- Pilviaalto osioiden välissä ---------- */
