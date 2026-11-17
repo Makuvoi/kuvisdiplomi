@@ -79,18 +79,18 @@ img { max-width: 100%; display: block; }
   height: 165vh; /* mitä korkeampi, sitä nopeammin kuva liikkuu */
   z-index: -2;
   pointer-events: none;
-  background: url("kuvat/klemen-vrankar-lcT_p8kLCsc-unsplash.jpg") 20% 100% / cover no-repeat;
+  background: url("kuvat/tahtitaivas-ja-katsojan-siluetti_klemen-vrankar.jpg") 20% 100% / cover no-repeat;
   will-change: transform;
 }
 
 /* Sivukohtaiset taustakuvat */
 .tausta--tuote {
-  background-image: url("kuvat/luca-bravo-a_hPPrncGlQ-unsplash.jpg");
+  background-image: url("kuvat/kuunsirppi-sumuisen-merenrannan-ylla_luca-bravo.jpg");
   background-position: 50% 100%;
 }
 
 .tausta--meista {
-  background-image: url("kuvat/thomas-chizzali-K-ENC7LNABA-unsplash.jpg");
+  background-image: url("kuvat/linnunrata-ja-yksinainen-puu_thomas-chizzali.jpg");
   background-position: 50% 100%;
 }
 
@@ -266,8 +266,8 @@ main { display: block; }
   position: absolute;
   inset: 0;
   background: linear-gradient(135deg, #9db8ff, #5b7cff 50%, #3b4fd6);
-  -webkit-mask: url("kuvat/libre-clip-art-pSjMWyeS92w-unsplash.svg") center / contain no-repeat;
-  mask: url("kuvat/libre-clip-art-pSjMWyeS92w-unsplash.svg") center / contain no-repeat;
+  -webkit-mask: url("kuvat/musteroiske-jossa-pyorea-aukko_libre-clip-art.svg") center / contain no-repeat;
+  mask: url("kuvat/musteroiske-jossa-pyorea-aukko_libre-clip-art.svg") center / contain no-repeat;
 }
 
 .pallo {
@@ -419,7 +419,7 @@ figure.kortti { margin: 0; }
   transform: translate(-49%, -22%);
   background-image:
     linear-gradient(to bottom, rgba(21, 19, 47, 0) 45%, #15132f 92%),
-    url("kuvat/milad-fakurian-58Z17lnVS4U-unsplash-pieni.jpg");
+    url("kuvat/aivot-violetissa-valossa_milad-fakurian-pieni.jpg");
 }
 
 /* Hehkulamppu */
@@ -428,7 +428,7 @@ figure.kortti { margin: 0; }
   transform: translate(-50%, -20%);
   background-image:
     linear-gradient(to bottom, rgba(21, 19, 47, 0) 70%, #15132f 100%),
-    url("kuvat/diego-ph-fIq0tET6llw-unsplash-pieni.jpg");
+    url("kuvat/hehkulamppu-kadessa-iltataivasta-vasten_diego-ph-pieni.jpg");
 }
 
 /* Tanssija */
@@ -437,7 +437,7 @@ figure.kortti { margin: 0; }
   transform: translate(-50%, -32%);
   background-image:
     linear-gradient(to bottom, rgba(21, 19, 47, 0) 75%, #15132f 100%),
-    url("kuvat/drew-colins-YMXzVtd8awg-unsplash-pieni.jpg");
+    url("kuvat/tanssija-hyppaa-auringonlaskun-meressa_drew-colins-pieni.jpg");
 }
 
 /* ---------- Kaksipalstainen osio ---------- */
@@ -754,6 +754,25 @@ figure.kortti { margin: 0; }
   font-size: 0.8rem;
   color: var(--teksti-hento);
   text-align: center;
+}
+
+.kuvakrediitti a { color: inherit; }
+
+/* Korttikuvan tekijä kortin alareunassa */
+.kortti .kuvakrediitti--kortti {
+  margin: 20px 0 0;
+  font-size: 0.75rem;
+  text-align: left;
+  opacity: 0.85;
+}
+
+/* Herokuvan (musteroiskeen) tekijä kuvan alla */
+.kuvakrediitti--hero {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2em;
+  margin: 0;
 }
 
 /* ---------- Pilviaalto osioiden välissä ---------- */
