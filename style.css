@@ -320,18 +320,32 @@ main { display: block; }
 @keyframes pyori { to { transform: rotate(360deg); } }
 
 /* ---------- Napit ---------- */
+/* Nappien fontti: Showclick (Khurasan, khurasanstudio.com) */
+@font-face {
+  font-family: "Showclick";
+  src: url("fontit/Showclick.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Napin muoto on siveltimenveto: ::before-kerros täytetään värillä ja
    rajataan vedon muotoon maskilla, joka venyy napin kokoiseksi.
-   Varjo tehdään drop-shadow-suodattimella, koska se seuraa muotoa. */
+   Vedon kiinteä osa on vasemmalla ja keskellä, oikealla harjakset,
+   joten tekstille on enemmän tilaa oikealla. Alareunan suurempi
+   täyte nostaa tekstiä ylemmäs. */
 .nappi {
   position: relative;
   isolation: isolate;
   display: inline-block;
-  padding: 18px 64px 18px 36px;
+  padding: 14px 96px 24px 40px;
   border: none;
   background: none;
-  font: inherit;
-  font-weight: 600;
+  font-family: "Showclick", "Quicksand", "Segoe UI", system-ui, sans-serif;
+  font-size: 1.2rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #000;
   text-decoration: none;
   cursor: pointer;
   transition: transform 0.25s, filter 0.25s;
@@ -347,19 +361,13 @@ main { display: block; }
 }
 
 .nappi--paa {
-  color: #fff;
   filter: drop-shadow(0 8px 16px rgba(162, 125, 255, 0.55));
 }
 
 .nappi--paa::before { background: var(--liuku); }
 
-.nappi--toissijainen { color: var(--teksti); }
-
-.nappi--toissijainen::before {
-  background: rgba(255, 255, 255, 0.2);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-}
+/* Toissijainen veto on vaalea, jotta musta teksti erottuu */
+.nappi--toissijainen::before { background: #e6ddff; }
 
 .nappi:hover { transform: translateY(-2px); filter: drop-shadow(0 12px 22px rgba(162, 125, 255, 0.8)); }
 .nappi:focus-visible { outline: 3px solid var(--violetti); outline-offset: 6px; }
@@ -509,8 +517,7 @@ figure.kortti { margin: 0; }
 }
 
 .banneri .ylaotsake { color: rgba(255, 255, 255, 0.85); }
-.banneri .nappi--toissijainen { color: #fff; }
-.banneri .nappi--toissijainen::before { background: rgba(255, 255, 255, 0.3); }
+.banneri .nappi--toissijainen::before { background: #fff; }
 
 /* ---------- Tuotteet ---------- */
 .tuote {
