@@ -451,7 +451,12 @@ main { display: block; }
   filter: drop-shadow(0 8px 16px rgba(162, 125, 255, 0.55));
 }
 
-.nappi--paa::before { background: var(--myrsky-kuva) var(--myrsky-x, 50%) var(--myrsky-y, 50%) / var(--myrsky-koko, 300%) no-repeat; }
+/* Pääpainikkeen veto on pala akvarellia, jolle script.js arpoo saman
+   sävyn ja kylläisyyden vaihtelun kuin lasikorteille */
+.nappi--paa::before {
+  background: var(--myrsky-kuva) var(--myrsky-x, 50%) var(--myrsky-y, 50%) / var(--myrsky-koko, 300%) no-repeat;
+  filter: hue-rotate(var(--myrsky-savy, 0deg)) saturate(var(--myrsky-kyllaisyys, 1));
+}
 
 /* Toissijainen veto on vaalea, jotta musta teksti erottuu */
 .nappi--toissijainen::before { background: #e6ddff; }
@@ -523,8 +528,17 @@ figure.kortti { margin: 0; }
    Kuva on omana kerroksenaan (::before) kortin yläosassa, ja sitä
    nostetaan ylöspäin translate-arvolla niin, että kuvan pääaihe
    näkyy tekstin yläpuolella. Kuvan alareuna liukuu tummaan, ja
-   ::after tummentaa tekstin alueen. */
+   ::after tummentaa tekstin alueen.
+
+   Tumma pohja on lähes mustaksi sävytetty pala Myrsky-akvarellia
+   (--kuva-pohja akvarellin päällä). Pohjan sävy (--kuva-savy) arvotaan
+   script.js:ssä sinisen ja magentan väliltä. Kuvan ja tekstialueen
+   häivytykset tehdään maskeilla, joiden peittävyys on täsmälleen sama
+   kuin aiemmissa mustissa liukuväreissä, joten pohja ei peitä kuvia
+   yhtään enempää kuin ennen. */
 .kortti--kuva {
+  --myrsky-koko: 260%;
+  --kuva-pohja: hsl(var(--kuva-savy, 245) 100% 3.2% / 0.85);
   position: relative;
   isolation: isolate;
   overflow: hidden;
@@ -532,7 +546,9 @@ figure.kortti { margin: 0; }
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  background: #15132f;
+  background:
+    linear-gradient(var(--kuva-pohja), var(--kuva-pohja)),
+    var(--myrsky-kuva) var(--myrsky-x, 50%) var(--myrsky-y, 50%) / var(--myrsky-koko) no-repeat;
   text-shadow: 0 1px 12px rgba(13, 12, 36, 0.6);
 }
 
@@ -546,14 +562,20 @@ figure.kortti { margin: 0; }
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  -webkit-mask-image: linear-gradient(to bottom, #000 var(--haivytys-alku), transparent var(--haivytys-loppu));
+  mask-image: linear-gradient(to bottom, #000 var(--haivytys-alku), transparent var(--haivytys-loppu));
 }
 
+/* Sama tumma akvarellipohja kuin kortissa, häivytettynä esiin samoin
+   peittävyyksin kuin aiempi musta liukuväri (0 → 0,8 → 1) */
 .kortti--kuva::after {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(to bottom, rgba(21, 19, 47, 0) 38%, rgba(21, 19, 47, 0.8) 60%, #15132f 85%);
+  background: inherit;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 38%, rgba(0, 0, 0, 0.8) 60%, #000 85%);
+  mask-image: linear-gradient(to bottom, transparent 38%, rgba(0, 0, 0, 0.8) 60%, #000 85%);
 }
 
 /* Aivot: kuvaa suurennetaan hieman, jotta aivot erottuvat */
@@ -561,54 +583,54 @@ figure.kortti { margin: 0; }
   width: 173%;
   aspect-ratio: 900 / 684;
   transform: translate(-49%, -22%);
-  background-image:
-    linear-gradient(to bottom, rgba(21, 19, 47, 0) 45%, #15132f 92%),
-    url("kuvat/aivot-violetissa-valossa_milad-fakurian-pieni.jpg");
+  --haivytys-alku: 45%;
+  --haivytys-loppu: 92%;
+  background-image: url("kuvat/aivot-violetissa-valossa_milad-fakurian-pieni.jpg");
 }
 
 /* Hehkulamppu */
 .kortti--luovuus::before {
   aspect-ratio: 900 / 1125;
   transform: translate(-50%, -20%);
-  background-image:
-    linear-gradient(to bottom, rgba(21, 19, 47, 0) 70%, #15132f 100%),
-    url("kuvat/hehkulamppu-kadessa-iltataivasta-vasten_diego-ph-pieni.jpg");
+  --haivytys-alku: 70%;
+  --haivytys-loppu: 100%;
+  background-image: url("kuvat/hehkulamppu-kadessa-iltataivasta-vasten_diego-ph-pieni.jpg");
 }
 
 /* Tanssija */
 .kortti--liike::before {
   aspect-ratio: 900 / 1190;
   transform: translate(-50%, -32%);
-  background-image:
-    linear-gradient(to bottom, rgba(21, 19, 47, 0) 75%, #15132f 100%),
-    url("kuvat/tanssija-hyppaa-auringonlaskun-meressa_drew-colins-pieni.jpg");
+  --haivytys-alku: 75%;
+  --haivytys-loppu: 100%;
+  background-image: url("kuvat/tanssija-hyppaa-auringonlaskun-meressa_drew-colins-pieni.jpg");
 }
 
 /* Tuotesivu, vaihe 1: kannettava tietokone */
 .kortti--varaus::before {
   aspect-ratio: 900 / 1350;
   transform: translate(-50%, -12%);
-  background-image:
-    linear-gradient(to bottom, rgba(21, 19, 47, 0) 60%, #15132f 90%),
-    url("kuvat/nainen-kayttaa-kannettavaa-tietokonetta_ellie-ellien-pieni.jpg");
+  --haivytys-alku: 60%;
+  --haivytys-loppu: 90%;
+  background-image: url("kuvat/nainen-kayttaa-kannettavaa-tietokonetta_ellie-ellien-pieni.jpg");
 }
 
 /* Tuotesivu, vaihe 2: kirurgi */
 .kortti--asennus::before {
   aspect-ratio: 900 / 1125;
   transform: translate(-50%, -6%);
-  background-image:
-    linear-gradient(to bottom, rgba(21, 19, 47, 0) 60%, #15132f 90%),
-    url("kuvat/kirurgi-leikkaussalissa_david-akinwale-pieni.jpg");
+  --haivytys-alku: 60%;
+  --haivytys-loppu: 90%;
+  background-image: url("kuvat/kirurgi-leikkaussalissa_david-akinwale-pieni.jpg");
 }
 
 /* Tuotesivu, vaihe 3: hehkuvat aivot kämmenen yllä */
 .kortti--kyvyt::before {
   aspect-ratio: 900 / 1600;
   transform: translate(-50%, -17%);
-  background-image:
-    linear-gradient(to bottom, rgba(21, 19, 47, 0) 50%, #15132f 75%),
-    url("kuvat/hehkuvat-aivot-kammenen-ylla_tsd-studio-pieni.jpg");
+  --haivytys-alku: 50%;
+  --haivytys-loppu: 75%;
+  background-image: url("kuvat/hehkuvat-aivot-kammenen-ylla_tsd-studio-pieni.jpg");
 }
 
 /* Meistä-sivu, arvo 1: professori liitutaululla.
@@ -617,18 +639,18 @@ figure.kortti { margin: 0; }
   width: 165%;
   aspect-ratio: 900 / 506;
   transform: translate(-50%, 0);
-  background-image:
-    linear-gradient(to bottom, rgba(21, 19, 47, 0) 55%, #15132f 95%),
-    url("kuvat/professori-kirjoittaa-kaavoja-liitutaululle_vitaly-gariev-pieni.jpg");
+  --haivytys-alku: 55%;
+  --haivytys-loppu: 95%;
+  background-image: url("kuvat/professori-kirjoittaa-kaavoja-liitutaululle_vitaly-gariev-pieni.jpg");
 }
 
 /* Meistä-sivu, arvo 2: mies futuristisissa laseissa */
 .kortti--tulevaisuus::before {
   aspect-ratio: 900 / 1350;
   transform: translate(-50%, -14%);
-  background-image:
-    linear-gradient(to bottom, rgba(21, 19, 47, 0) 50%, #15132f 80%),
-    url("kuvat/mies-futuristisissa-laseissa-neonvalossa_ameer-basheer-pieni.jpg");
+  --haivytys-alku: 50%;
+  --haivytys-loppu: 80%;
+  background-image: url("kuvat/mies-futuristisissa-laseissa-neonvalossa_ameer-basheer-pieni.jpg");
 }
 
 /* Meistä-sivu, arvo 3: kädet pitävät toisistaan kiinni.
@@ -637,9 +659,9 @@ figure.kortti { margin: 0; }
   width: 140%;
   aspect-ratio: 900 / 600;
   transform: translate(-50%, 0);
-  background-image:
-    linear-gradient(to bottom, rgba(21, 19, 47, 0) 55%, #15132f 95%),
-    url("kuvat/kadet-pitavat-toisistaan-kiinni_national-cancer-institute-pieni.jpg");
+  --haivytys-alku: 55%;
+  --haivytys-loppu: 95%;
+  background-image: url("kuvat/kadet-pitavat-toisistaan-kiinni_national-cancer-institute-pieni.jpg");
 }
 
 /* ---------- Kaksipalstainen osio ---------- */

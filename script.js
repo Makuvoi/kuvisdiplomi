@@ -37,20 +37,25 @@ const vali = (min, max) => min + Math.random() * (max - min);
 document.querySelectorAll(
   ".liukuteksti, .nappi--paa, .nav a[aria-current='page'], .kuvapaikka, .banneri, " +
   ".tuote--suositeltu, .tuote__merkki, .aikajana, .henkilo__kuva, .pallo, .tuote__siru, .tausta, " +
-  ".kortti--myrsky, .ukk details"
+  ".kortti--myrsky, .ukk details, .kortti--kuva"
 ).forEach((el) => {
   el.style.setProperty("--myrsky-x", `${vali(12, 88).toFixed(1)}%`);
   el.style.setProperty("--myrsky-y", `${vali(12, 88).toFixed(1)}%`);
 });
 
-// Akvarellilasikorteille satunnainen sävynsiirto ja kylläisyys, jotta
-// jokainen kortti on selvästi eri värinen. Positiivinen siirto vie
+// Akvarellilasikorteille ja pääpainikkeille satunnainen sävynsiirto ja
+// kylläisyys, jotta jokainen on selvästi eri värinen. Positiivinen siirto vie
 // pinkkiä kohti oranssia ja keltaista, joten sitä suuntaa on vähemmän:
 // sävyt vaihtelevat punertavasta pinkistä violetin kautta siniseen.
 // Tuotekortit pysyvät oman mallinsa värisinä (style.css).
-document.querySelectorAll(".kortti--myrsky, .ukk details").forEach((el) => {
+document.querySelectorAll(".kortti--myrsky, .ukk details, .nappi--paa").forEach((el) => {
   el.style.setProperty("--myrsky-savy", `${vali(-75, 20).toFixed(0)}deg`);
   el.style.setProperty("--myrsky-kyllaisyys", vali(1, 1.6).toFixed(2));
+});
+
+// Kuvakorttien tumman pohjan sävy (HSL-sävy): sinisestä magentaan
+document.querySelectorAll(".kortti--kuva").forEach((el) => {
+  el.style.setProperty("--kuva-savy", vali(228, 300).toFixed(0));
 });
 
 // Logon täyte: kuva on 200 × 191 ja logo 64 × 40, joten kuvaa siirretään
@@ -177,12 +182,12 @@ if (linssiPallot.length) {
 
     // Linssin säde kuvan koordinaateissa (koko kuva = 1). Pienemmissä
     // palloissa näytetään pienempi pala, jotta siveltimenvedot erottuvat.
-    const sade = pallo.classList.contains("pallo") ? 0.36 : 0.27;
+    const sade = pallo.classList.contains("pallo") ? 0.28 : 0.21;
     gl.uniform1f(u("sade"), sade);
 
     // Kalansilmän voimakkuus: 0 = pelkkä pallopinta, 1 = keskusta
     // suurenee hyvin voimakkaasti ja reunat puristuvat kokoon.
-    const VAHVUUS = 0.8;
+    const VAHVUUS = 0.49;
     gl.uniform1f(u("vahvuus"), VAHVUUS);
 
     // Linssi kiertää kuvassa ympyrärataa kuvan keskipisteen ympäri.
