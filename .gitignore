@@ -1,2 +1,5 @@
 # Clauden paikalliset asetukset (esim. esikatselupalvelin), eivät kuulu sivustoon
 .claude/
+
+# Alkuperäinen lähdekuva (95 Mt); sivu käyttää kuvat/myrsky-1600.jpg-versiota
+kuvat/Myrsky.png

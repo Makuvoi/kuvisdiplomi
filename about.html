@@ -25,11 +25,10 @@
       <a class="logo" href="index.html">
         <svg viewBox="0 0 64 40" aria-hidden="true">
           <defs>
-            <linearGradient id="logoLiuku" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stop-color="#6f8dff"/>
-              <stop offset="0.5" stop-color="#a27dff"/>
-              <stop offset="1" stop-color="#ff8fcf"/>
-            </linearGradient>
+            <!-- Logon täyte on pala akvarellia; script.js arpoo kohdan -->
+            <pattern id="logoLiuku" patternUnits="userSpaceOnUse" width="64" height="40">
+              <image class="logo__kuva" href="kuvat/myrsky-1600.jpg" x="-68" y="-75" width="200" height="191" preserveAspectRatio="none"/>
+            </pattern>
           </defs>
           <path fill="url(#logoLiuku)" d="M16 38a14 14 0 0 1-2-27.9A18 18 0 0 1 48.5 9 12 12 0 0 1 50 38Z"/>
           <circle cx="32" cy="22" r="4" fill="#fff" opacity="0.9"/>
