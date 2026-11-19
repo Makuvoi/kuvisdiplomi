@@ -15,6 +15,13 @@
   --yo: #0d0c24;
   --teksti: #f4f1ff;
   --teksti-hento: #c9c3ee;
+
+  /* Mallikohtaiset sävyt akvarellille. Vastaavat pisaroiden WebGL-
+     sävytystä (script.js), ja niitä käytetään sekä pisaroiden CSS-
+     varakeinossa että tuotekorttien taustassa. */
+  --suodin-pisara: saturate(1.35) hue-rotate(6deg);
+  --suodin-pro: brightness(0.55) contrast(1.15) saturate(4) hue-rotate(-43deg);
+  --suodin-max: saturate(2.2) hue-rotate(-6deg);
   --lasi: rgba(255, 255, 255, 0.08);
   --lasi-reuna: rgba(255, 255, 255, 0.2);
   --varjo: 0 20px 60px -20px rgba(5, 4, 25, 0.7);
@@ -287,7 +294,7 @@ main { display: block; }
    mallikohtaiset versiot vaihtavat vain muuttujien arvot. */
 .pallo,
 .tuote__siru {
-  --pallo-suodin: saturate(1.15);
+  --pallo-suodin: var(--suodin-pisara);
   --pallo-heijastus: rgba(255, 143, 207, 0.55);
   --pallo-hehku-1: 162, 125, 255;
   --pallo-hehku-2: 255, 143, 207;
@@ -321,6 +328,47 @@ main { display: block; }
 }
 
 .linssi-paalla::before { display: none; }
+
+/* Pisarat eivät pyöri: heijastus pysyy paikallaan, ja akvarelli
+   kiertää pallon sisällä tasaista ympyrärataa. Tämä on varakeino
+   (WebGL-linssi tekee saman liikkeen kalansilmän läpi). Ympyrä syntyy
+   kahdesta edestakaisesta liikkeestä: vaaka- ja pystysuunta heiluvat
+   siniaallon tapaan, ja pystyliike on neljänneskierroksen jäljessä. */
+@property --kierto-x {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 50%;
+}
+
+@property --kierto-y {
+  syntax: "<percentage>";
+  inherits: false;
+  initial-value: 50%;
+}
+
+.pallo.pallo::before,
+.tuote__siru.tuote__siru::before {
+  --kierros: 30s;
+  inset: 0;
+  background-size: 300%;
+  background-position: var(--kierto-x) var(--kierto-y);
+  animation:
+    kierto-x calc(var(--kierros) / 2) cubic-bezier(0.37, 0, 0.63, 1) calc(var(--kierros) / -4) infinite alternate,
+    kierto-y calc(var(--kierros) / 2) cubic-bezier(0.37, 0, 0.63, 1) infinite alternate;
+}
+
+.pallo.pallo::after,
+.tuote__siru.tuote__siru::after { animation: none; }
+
+@keyframes kierto-x {
+  from { --kierto-x: 20%; }
+  to   { --kierto-x: 80%; }
+}
+
+@keyframes kierto-y {
+  from { --kierto-y: 20%; }
+  to   { --kierto-y: 80%; }
+}
 
 /* Kalansilmälinssi (script.js) */
 .pisara-linssi {
@@ -431,6 +479,39 @@ main { display: block; }
 .kortti p:last-child { margin-bottom: 0; }
 
 figure.kortti { margin: 0; }
+
+/* Akvarellilasi: lasikortit (.kortti--myrsky) ja UKK-kortit.
+   Akvarelli on omana läpikuultavana kerroksenaan (::before), jolloin
+   sivun tausta kuultaa sumeana läpi. script.js arpoo jokaiselle
+   kortille oman kohdan kuvasta, sävynsiirron (--myrsky-savy) ja
+   kylläisyyden (--myrsky-kyllaisyys). Akvarellin alla on tumma lasi, jotta valkoinen
+   teksti erottuu (kontrasti n. 6,5:1, heikoimmissakin kohdissa yli
+   5:1). */
+.kortti--myrsky,
+.ukk details {
+  position: relative;
+  isolation: isolate;
+  background: rgba(13, 12, 36, 0.55);
+  color: var(--teksti);
+}
+
+.kortti--myrsky::before,
+.ukk details::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: var(--myrsky-kuva) var(--myrsky-x, 50%) var(--myrsky-y, 50%) / var(--myrsky-koko, 300%) no-repeat;
+  opacity: 0.45;
+  filter: hue-rotate(var(--myrsky-savy, 0deg)) saturate(var(--myrsky-kyllaisyys, 1));
+  pointer-events: none;
+}
+
+/* Tuotekortit sävytetään oman mallinsa pisaran värisiksi */
+.tuote.kortti--myrsky::before { filter: var(--suodin-pisara); }
+.tuote--pro.kortti--myrsky::before { filter: var(--suodin-pro); }
+.tuote--max.kortti--myrsky::before { filter: var(--suodin-max); }
 .kortti blockquote {
   margin: 0 0 16px;
   font-family: "Cormorant Garamond", Georgia, serif;
@@ -624,12 +705,25 @@ figure.kortti { margin: 0; }
   position: relative;
 }
 
-.tuote--suositeltu {
-  border: 2px solid transparent;
-  background:
-    linear-gradient(rgba(30, 26, 72, 0.85), rgba(30, 26, 72, 0.85)) padding-box,
-    var(--myrsky-kuva) var(--myrsky-x, 50%) var(--myrsky-y, 50%) / var(--myrsky-koko, 300%) no-repeat border-box;
+/* Suositellun mallin reunus on täysin peittävää akvarellia: ::after
+   on kortin kokoinen kehä, jonka sisäosa leikataan maskilla pois. */
+.tuote--suositeltu { border-color: transparent; }
+
+.tuote--suositeltu::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  z-index: -1;
+  padding: 2px;
+  border-radius: inherit;
+  background: var(--myrsky-kuva) var(--myrsky-x, 50%) var(--myrsky-y, 50%) / var(--myrsky-koko, 300%) no-repeat;
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);
+  pointer-events: none;
 }
+
+.tuote--pro.tuote--suositeltu::after { filter: var(--suodin-pro); }
 
 .tuote__merkki {
   position: absolute;
@@ -657,7 +751,7 @@ figure.kortti { margin: 0; }
 
 /* Pisara Pro: tummansinisempi */
 .tuote__siru--pro {
-  --pallo-suodin: brightness(0.6) saturate(1.5) hue-rotate(-70deg);
+  --pallo-suodin: var(--suodin-pro);
   --pallo-heijastus: rgba(79, 141, 255, 0.5);
   --pallo-hehku-1: 59, 91, 219;
   --pallo-hehku-2: 40, 60, 180;
@@ -665,7 +759,7 @@ figure.kortti { margin: 0; }
 
 /* Pisara Pro Ultra Super Max: pinkimpi ja violetimpi */
 .tuote__siru--max {
-  --pallo-suodin: saturate(1.6) hue-rotate(12deg);
+  --pallo-suodin: var(--suodin-max);
   --pallo-heijastus: rgba(255, 95, 200, 0.65);
   --pallo-hehku-1: 184, 77, 255;
   --pallo-hehku-2: 255, 95, 200;
@@ -732,6 +826,7 @@ figure.kortti { margin: 0; }
 
 .kentta option { background: #1d1a45; color: var(--teksti); }
 
+
 .valinta {
   display: flex;
   gap: 10px;
@@ -759,7 +854,6 @@ figure.kortti { margin: 0; }
 .ukk { max-width: 760px; margin: 0 auto; }
 
 .ukk details {
-  background: var(--lasi);
   border: 1px solid var(--lasi-reuna);
   border-radius: 20px;
   padding: 20px 24px;

@@ -36,10 +36,21 @@ const vali = (min, max) => min + Math.random() * (max - min);
 
 document.querySelectorAll(
   ".liukuteksti, .nappi--paa, .nav a[aria-current='page'], .kuvapaikka, .banneri, " +
-  ".tuote--suositeltu, .tuote__merkki, .aikajana, .henkilo__kuva, .pallo, .tuote__siru, .tausta"
+  ".tuote--suositeltu, .tuote__merkki, .aikajana, .henkilo__kuva, .pallo, .tuote__siru, .tausta, " +
+  ".kortti--myrsky, .ukk details"
 ).forEach((el) => {
   el.style.setProperty("--myrsky-x", `${vali(12, 88).toFixed(1)}%`);
   el.style.setProperty("--myrsky-y", `${vali(12, 88).toFixed(1)}%`);
+});
+
+// Akvarellilasikorteille satunnainen sävynsiirto ja kylläisyys, jotta
+// jokainen kortti on selvästi eri värinen. Positiivinen siirto vie
+// pinkkiä kohti oranssia ja keltaista, joten sitä suuntaa on vähemmän:
+// sävyt vaihtelevat punertavasta pinkistä violetin kautta siniseen.
+// Tuotekortit pysyvät oman mallinsa värisinä (style.css).
+document.querySelectorAll(".kortti--myrsky, .ukk details").forEach((el) => {
+  el.style.setProperty("--myrsky-savy", `${vali(-75, 20).toFixed(0)}deg`);
+  el.style.setProperty("--myrsky-kyllaisyys", vali(1, 1.6).toFixed(2));
 });
 
 // Logon täyte: kuva on 200 × 191 ja logo 64 × 40, joten kuvaa siirretään
@@ -52,10 +63,11 @@ document.querySelectorAll(".logo__kuva").forEach((kuva) => {
 // ---------- Pisaran kalansilmälinssi ----------
 // Pallojen (.pallo, .tuote__siru) sisälle piirretään WebGL-canvas, jossa
 // akvarelli näkyy pallomaisen linssin läpi: keskusta suurenee ja reunat
-// puristuvat kokoon. Linssin kohta kuvassa vaeltaa hitaasti ja hakeutuu
-// välillä kokonaan uuteen paikkaan. Jos WebGL ei toimi (tai sivu on
-// avattu suoraan tiedostona, jolloin selain estää kuvan käytön), CSS:n
-// pyörivä kuva jää näkyviin.
+// puristuvat kokoon. Pisara ei pyöri, vaan linssin kohta kiertää kuvassa
+// tasaista ympyrärataa, jolloin akvarelli liukuu sulavasti eri suuntiin.
+// Jos WebGL ei toimi (tai sivu on avattu suoraan tiedostona, jolloin
+// selain estää kuvan käytön), CSS tekee saman ympyräliikkeen ilman
+// kalansilmää.
 const linssiPallot = [...document.querySelectorAll(".pallo, .tuote__siru")];
 
 if (linssiPallot.length) {
@@ -79,6 +91,7 @@ if (linssiPallot.length) {
     uniform sampler2D kuva;
     uniform vec2 keskus;
     uniform float sade;
+    uniform float vahvuus;
     uniform float kulma;
     uniform vec3 saato;
 
@@ -109,10 +122,10 @@ if (linssiPallot.length) {
       float rr = min(r, 0.999);
       vec2 suunta = p / max(r, 1e-4);
       float pallo = asin(rr) / 1.5707963;
-      float uusi = mix(pallo, pallo * pallo, 0.45);
+      float uusi = mix(pallo, pallo * pallo, vahvuus);
       vec2 q = suunta * uusi;
       // Pieni värien hajonta reunoilla, kuten oikeassa lasissa
-      float hajonta = 0.035 * r * r;
+      float hajonta = 0.05 * r * r;
       vec3 c = vec3(
         texture2D(kuva, nayte(q * (1.0 + hajonta))).r,
         texture2D(kuva, nayte(q)).g,
@@ -164,27 +177,28 @@ if (linssiPallot.length) {
 
     // Linssin säde kuvan koordinaateissa (koko kuva = 1). Pienemmissä
     // palloissa näytetään pienempi pala, jotta siveltimenvedot erottuvat.
-    const sade = pallo.classList.contains("pallo") ? 0.2 : 0.15;
+    const sade = pallo.classList.contains("pallo") ? 0.36 : 0.27;
     gl.uniform1f(u("sade"), sade);
 
-    // Keskipisteen pitää pysyä niin kaukana kuvan reunoista, ettei
-    // linssiin osu valkoista paperia.
-    const MARGINAALI = 0.07;
-    const WOBBLE = 0.04;
-    const reuna = MARGINAALI + sade + WOBBLE;
-    const arvoKohde = () => [vali(reuna, 1 - reuna), vali(reuna, 1 - reuna)];
+    // Kalansilmän voimakkuus: 0 = pelkkä pallopinta, 1 = keskusta
+    // suurenee hyvin voimakkaasti ja reunat puristuvat kokoon.
+    const VAHVUUS = 0.8;
+    gl.uniform1f(u("vahvuus"), VAHVUUS);
 
-    const tila = {
-      kohta: arvoKohde(),
-      lahto: null,
-      kohde: null,
-      siirtoAlku: 0,
-      seuraavaSiirto: vali(4, 9),
-      vaiheet: [vali(0, 6.3), vali(0, 6.3), vali(0, 6.3)],
-      kulma0: vali(0, 6.3),
-    };
-    const SIIRTOAIKA = 3.2;
-    const pehmea = (t) => t * t * (3 - 2 * t);
+    // Linssi kiertää kuvassa ympyrärataa kuvan keskipisteen ympäri.
+    // Radan säde valitaan niin, ettei linssiin osu kuvan reunojen
+    // valkoista paperia. Jokaisella pisaralla on oma lähtökohta ja
+    // kiertosuunta.
+    const MARGINAALI = 0.05;
+    const RATA = 0.5 - MARGINAALI - sade;
+    const vaihe = vali(0, Math.PI * 2);
+    // Nopeus valitaan niin, että kuva liukuu pisaran keskellä noin 0,8
+    // pisaran säteen verran sekunnissa pisaran koosta riippumatta.
+    // Linssin keskellä yksi pisaran säde vastaa kuvassa matkaa
+    // (1 - VAHVUUS) * 2/π * sade (ks. kalansilmän kaava varjostimessa).
+    const NOPEUS = 0.8;
+    const keskiosa = (1 - VAHVUUS) * (2 / Math.PI) * sade;
+    const kulmanopeus = (NOPEUS * keskiosa / RATA) * vali(0.9, 1.1) * (Math.random() < 0.5 ? -1 : 1);
 
     const koko = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -196,33 +210,12 @@ if (linssiPallot.length) {
       }
     };
 
+    // Pisara ei pyöri: kuvan kulma pysyy samana, vain kohta vaihtuu.
     const piirra = (t) => {
       koko();
-      // Ajoittain linssi liukuu kokonaan uuteen kohtaan kuvassa
-      if (!vahanLiiketta) {
-        if (!tila.kohde && t >= tila.seuraavaSiirto) {
-          tila.lahto = tila.kohta;
-          tila.kohde = arvoKohde();
-          tila.siirtoAlku = t;
-        }
-        if (tila.kohde) {
-          const e = pehmea(Math.min(1, (t - tila.siirtoAlku) / SIIRTOAIKA));
-          tila.kohta = [
-            tila.lahto[0] + (tila.kohde[0] - tila.lahto[0]) * e,
-            tila.lahto[1] + (tila.kohde[1] - tila.lahto[1]) * e,
-          ];
-          if (e >= 1) {
-            tila.kohde = null;
-            tila.seuraavaSiirto = t + vali(6, 12);
-          }
-        }
-      }
-      // Hidas vaellus ja kierto siirtojen välissä
-      const [a, b, c] = tila.vaiheet;
-      gl.uniform2f(u("keskus"),
-        tila.kohta[0] + WOBBLE * Math.sin(t * 0.37 + a),
-        tila.kohta[1] + WOBBLE * Math.sin(t * 0.29 + b));
-      gl.uniform1f(u("kulma"), tila.kulma0 + 0.25 * Math.sin(t * 0.11 + c));
+      const a = vaihe + t * kulmanopeus;
+      gl.uniform2f(u("keskus"), 0.5 + RATA * Math.cos(a), 0.5 + RATA * Math.sin(a));
+      gl.uniform1f(u("kulma"), 0);
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
     };
 
@@ -231,9 +224,15 @@ if (linssiPallot.length) {
     return { pallo, piirra };
   };
 
+  // Odotetaan load-tapahtumaa eikä decode()-lupausta: decode() jää
+  // joissain selaimissa odottamaan, kunnes sivu piirretään näkyviin.
   const kuva = new Image();
+  const latautunut = new Promise((valmis, virhe) => {
+    kuva.onload = valmis;
+    kuva.onerror = virhe;
+  });
   kuva.src = MYRSKY;
-  kuva.decode().then(() => {
+  latautunut.then(() => {
     // WebGL 1 tarvitsee mipmappeja varten kahden potenssin kokoisen
     // tekstuurin, joten kuva skaalataan 1024 × 1024:ään.
     const lahde = document.createElement("canvas");
